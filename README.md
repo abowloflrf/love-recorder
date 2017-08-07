@@ -7,4 +7,4 @@ composer install
 php artisan serve
 ```
 Visit 127.0.0.1:8000 to view the website
-![](demo.png)
+![](preview.png)
