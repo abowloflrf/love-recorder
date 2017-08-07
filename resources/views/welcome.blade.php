@@ -48,6 +48,13 @@
             .title {
                 font-size: 84px;
             }
+            .title a{
+                text-decoration: none;
+                color: #636b6f;
+            }
+            .title a:visited{
+                color: #636b6f;
+            }
 
             .links > a {
                 color: #636b6f;
@@ -79,7 +86,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Love Recorder
+                    <a href="/home">Love Recorder</a>
                 </div>
 
                 <div class="links">

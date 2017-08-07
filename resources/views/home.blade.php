@@ -6,16 +6,13 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Dashboard</div>
+                <div class="panel-heading">Welcome</div>
 
                 <div class="panel-body">
-                    You are logged in! @if(auth()->user()->member=='1')
-                                            <b>lucky girl</b>
-                                           @elseif(auth()->user()->member=='2')
-                                            <b>lucky boy</b>
-                                           @else
-                                            guest
-                                           @endif
+                    @if(!auth()->check())<b>guest</b>
+                    @elseif(auth()->user()->member=='1')<b>lucky girl</b>
+                    @else<b>lucky boy</b>
+                    @endif
                 </div>
 
             </div>

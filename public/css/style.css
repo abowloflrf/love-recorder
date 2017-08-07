@@ -1,0 +1,25 @@
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
+    min-height: 100%;
+}
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    /* Set the fixed height of the footer here */
+    height: 60px;
+    background-color: #ffffff;
+    border-top: 1px solid #d3e0e9;
+}
+.container .text-muted {
+    margin: 20px 0;
+}
+.uk-badge{
+    font-family:"Calibri Light","Segoe UI","Microsoft YaHei UI Light",sans-serif;
+}

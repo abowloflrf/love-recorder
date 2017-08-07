@@ -9,7 +9,7 @@ class RecordController extends Controller
 {
     public function index()
     {
-        if (!auth()) {
+        if (!auth()->check()) {
             return view('auth.not-login');
         }elseif (auth()->user()->member<3){
             return view('layouts.create');
@@ -25,7 +25,7 @@ class RecordController extends Controller
             "user_id"=>$record->user_id,
             "user_name"=>$record->user()->value('name'),
             "body"=>$record->body,
-            "created_at"=>$record->created_at->toDateTimeString()
+            "created_at"=>$record->created_at->toDayDateTimeString()
         ];
         return $data;
 
@@ -45,6 +45,6 @@ class RecordController extends Controller
             'user_id'=>auth()->user()->id,
             'date_and_time'=>\request('date_and_time')
         ]);
-        return redirect('/');
+        return redirect('/home');
     }
 }

@@ -13,6 +13,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('css/uikit.css')}}">
+    <link rel="stylesheet" href="{{asset('css/style.css')}}">
     <!-- Scripts -->
 
     <script src="{{ asset('js/app.js') }}"></script>
@@ -36,7 +37,7 @@
                     </button>
 
                     <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
+                    <a class="navbar-brand" href="{{ url('/home') }}">
                         {{ config('app.name', 'Laravel') }}
                     </a>
                 </div>
@@ -71,9 +72,11 @@
                                             {{ csrf_field() }}
                                         </form>
                                     </li>
+                                    @if(auth()->user()->member<3)
                                     <li>
                                         <a href="/create">Create</a>
                                     </li>
+                                    @endif
                                 </ul>
                             </li>
                         @endif
@@ -83,6 +86,7 @@
         </nav>
 
         @yield('content')
+        @include('layouts.footer')
     </div>
 
 </body>
