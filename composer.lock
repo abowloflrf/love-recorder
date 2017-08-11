@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "c85639646cd488468778ce2b6c6bc55d",
+    "content-hash": "2732013486b8d70bbf96c4e4ebbaa398",
     "packages": [
         {
             "name": "barryvdh/laravel-ide-helper",
@@ -1025,6 +1025,57 @@
                 "shell"
             ],
             "time": "2017-07-29T19:30:02+00:00"
+        },
+        {
+            "name": "qiniu/php-sdk",
+            "version": "v7.1.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/qiniu/php-sdk.git",
+                "reference": "b91653485e36b4797d7a302cc86c49695e47a642"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://files.phpcomposer.com/files/qiniu/php-sdk/b91653485e36b4797d7a302cc86c49695e47a642.zip",
+                "reference": "b91653485e36b4797d7a302cc86c49695e47a642",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0",
+                "squizlabs/php_codesniffer": "~2.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Qiniu\\": "src/Qiniu"
+                },
+                "files": [
+                    "src/Qiniu/functions.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Qiniu",
+                    "email": "sdk@qiniu.com",
+                    "homepage": "http://www.qiniu.com"
+                }
+            ],
+            "description": "Qiniu Resource (Cloud) Storage SDK for PHP",
+            "homepage": "http://developer.qiniu.com/",
+            "keywords": [
+                "cloud",
+                "qiniu",
+                "sdk",
+                "storage"
+            ],
+            "time": "2016-11-18T02:57:31+00:00"
         },
         {
             "name": "ramsey/uuid",
@@ -2160,49 +2211,6 @@
                 "instantiate"
             ],
             "time": "2015-06-14T21:17:01+00:00"
-        },
-        {
-            "name": "eonasdan/bootstrap-datetimepicker",
-            "version": "4.17.47",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Eonasdan/bootstrap-datetimepicker.git",
-                "reference": "25c11d79e614bc6463a87c3dd9cbf8280422e006"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://files.phpcomposer.com/files/Eonasdan/bootstrap-datetimepicker/25c11d79e614bc6463a87c3dd9cbf8280422e006.zip",
-                "reference": "25c11d79e614bc6463a87c3dd9cbf8280422e006",
-                "shasum": ""
-            },
-            "require": {
-                "components/jquery": ">=1.9.1",
-                "moment/moment": ">=2.10.5",
-                "robloach/component-installer": "*"
-            },
-            "type": "component",
-            "extra": {
-                "component": {
-                    "scripts": [
-                        "src/js/bootstrap-datetimepicker.js"
-                    ],
-                    "files": [
-                        "build/js/bootstrap-datetimepicker.min.js",
-                        "build/css/bootstrap-datetimepicker.min.css"
-                    ]
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "Date/time picker widget based on twitter bootstrap",
-            "homepage": "http://eonasdan.github.io/bootstrap-datetimepicker/",
-            "keywords": [
-                "DateTimePicker",
-                "bootstrap"
-            ],
-            "time": "2017-02-28T14:32:02+00:00"
         },
         {
             "name": "fzaninotto/faker",

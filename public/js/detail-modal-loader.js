@@ -8,5 +8,6 @@ function loadDetailModal(e) {
         $('#detail-modal-body').text(data.body);
         $('#detail-modal-author').text(data.user_name);
         $('#detail-modal-time').text(data.created_at);
+        $('#detail-modal-cover').attr('src',data.cover_img+'?imageView2/2/q/75/ignore-error/1');
     })
 }

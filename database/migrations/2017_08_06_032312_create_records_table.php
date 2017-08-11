@@ -18,6 +18,7 @@ class CreateRecordsTable extends Migration
             $table->integer('user_id');
             $table->text('title');
             $table->text('body');
+            $table->string('cover_img');
             $table->timestamp('date_and_time');
             $table->timestamps();
         });

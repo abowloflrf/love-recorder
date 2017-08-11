@@ -17,12 +17,14 @@
                             <label for="body">Content</label>
                             <textarea name="body" class="form-control" cols="30" rows="10"></textarea>
                         </div>
+                        @include('layouts.create.upload')
                         <div class="form-group">
                             <input name="date_and_time" class="datepicker-here form-control" data-timepicker="true" data-language='zh' data-position="top left">
                             <script>
                                 $('.datepicker-here').datepicker().data('datepicker').selectDate(new Date());
                             </script>
                         </div>
+                        <input type="hidden" name="cover_img" id="upload-img-input">
                         <div class="form-group">
                             <button class="btn btn-primary" type="submit">Submit</button>
                         </div>

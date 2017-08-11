@@ -24,4 +24,6 @@ Route::get('/record',function (){
 });
 Route::get('/record/{record}','RecordController@getRecord');
 Route::get('/create','RecordController@index');
+Route::post('/create/upload-img','RecordController@imgUpload');
 Route::post('/record','RecordController@store');
+
