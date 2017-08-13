@@ -16,18 +16,19 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-
 Route::get('/home', 'HomeController@index')->name('home');
+//create
+Route::get('/records/create','RecordController@create')->name('create');
+Route::post('/records/create/upload-img','RecordController@imgUpload');
+Route::post('/records','RecordController@store');
+//edit
+Route::get('/records/{id}/edit','RecordController@editView')->name('edit');
+Route::post('/records/{id}/edit/change-img','RecordController@changeImg');
+Route::put('/records/{id}','RecordController@update');
 
-Route::get('/record',function (){
+//apis
+Route::get('/api/records',function (){
     return \App\Record::all();
 });
-
-Route::get('/record/{record}','RecordController@getRecord');
-Route::put('/records/{id}','RecordController@update');
-Route::get('/records/{id}/edit','RecordController@editView');
-Route::post('/records/{id}/edit/change-img','RecordController@changeImg');
-Route::get('/create','RecordController@index');
-Route::post('/create/upload-img','RecordController@imgUpload');
-Route::post('/record','RecordController@store');
+Route::get('/api/records/{record}','RecordController@getRecord');
 

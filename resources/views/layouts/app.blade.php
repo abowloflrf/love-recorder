@@ -74,7 +74,7 @@
                                     </li>
                                     @if(auth()->user()->member<3)
                                     <li>
-                                        <a href="/create">Create</a>
+                                        <a href="{{ route('create') }}">Create</a>
                                     </li>
                                     @endif
                                 </ul>

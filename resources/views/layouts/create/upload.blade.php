@@ -38,7 +38,7 @@
         fail:function(msg){
             UIkit.notification(msg,{status:'danger'});
         },
-        url: '/create/upload-img',
+        url: '/records/create/upload-img',
         name:'file',
         params:{
              '_token':'{{csrf_token()}}'

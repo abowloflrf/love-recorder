@@ -11,7 +11,7 @@ use Qiniu\Storage\UploadManager;
 
 class RecordController extends Controller
 {
-    public function index()
+    public function create()
     {
         if (!auth()->check()) {
             return view('auth.not-login');
@@ -20,20 +20,6 @@ class RecordController extends Controller
         }else{
             return view('auth.permisson-deny');
         }
-
-    }
-
-    public function getRecord(Record $record){
-        $data=[
-            "title"=>$record->title,
-            "user_id"=>$record->user_id,
-            "user_name"=>$record->user()->value('name'),
-            "cover_img"=>$record->cover_img,
-            "body"=>$record->body,
-            "date_and_time"=>$record->date_and_time
-        ];
-        return $data;
-
     }
 
     public function store()
@@ -140,5 +126,18 @@ class RecordController extends Controller
         $record->save();
 
         return redirect('/home');
+    }
+
+//apis
+    public function getRecord(Record $record){
+        $data=[
+            "title"=>$record->title,
+            "user_id"=>$record->user_id,
+            "user_name"=>$record->user()->value('name'),
+            "cover_img"=>$record->cover_img,
+            "body"=>$record->body,
+            "date_and_time"=>$record->date_and_time
+        ];
+        return $data;
     }
 }
