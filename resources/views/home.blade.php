@@ -4,11 +4,11 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Welcome</div>
+        <div class="col-md-8 mx-auto">
+            <div class="card">
+                <div class="card-header">Welcome</div>
 
-                <div class="panel-body">
+                <div class="card-body">
                     @if(!auth()->check())<b>guest</b>
                     @elseif(auth()->user()->member=='1')<b>lucky girl</b>
                     @else<b>lucky boy</b>

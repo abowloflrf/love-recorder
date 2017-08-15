@@ -1,10 +1,15 @@
-@extends('layouts.app)
+@extends('layouts.app')
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-                <div class="panel panel-body">
-                    <h1>You don't have permission to do this.</h1>
+            <div class="col-md-8 mx-auto">
+                <div class="card">
+                    <div class="card-header">
+                        Something wrong...
+                    </div>
+                    <div class="card-body">
+                        You don't have permission to do this.
+                    </div>
                 </div>
             </div>
         </div>

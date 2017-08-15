@@ -5,9 +5,12 @@
     <script src="{{asset('js/i18n/datepicker.zh.js')}}"></script>
     <div class="container">
         <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-                <div class="panel panel-default">
-                    <div class="panel-body">
+            <div class="col-md-8 mx-auto">
+                <div class="card">
+                    <div class="card-header">
+                        Recording love...
+                    </div>
+                    <div class="card-body">
                         <form action="/records" method="post">
                             {{csrf_field()}}
                             <div class="form-group">

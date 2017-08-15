@@ -10,7 +10,7 @@
             <p class="uk-text-truncate">{{$record->body}}</p>
         </div>
         <div class="uk-card-footer">
-            <a href="#modal-overflow" class="uk-button uk-button-text" uk-toggle onclick="loadDetailModal(this)">Read more</a>
+            <a href="#" data-toggle="modal" data-target=".bd-example-modal-lg" class="uk-button uk-button-text" onclick="loadDetailModal(this)">Read more</a>
             <a href="/records/{{$record->id}}/edit" class="uk-button uk-button-text uk-margin-left">Edit</a>
         </div>
     </div>

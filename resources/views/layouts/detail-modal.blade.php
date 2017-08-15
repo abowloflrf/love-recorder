@@ -1,25 +1,22 @@
-<div id="modal-overflow" uk-modal>
-    <div class="uk-modal-dialog">
-        <div class="uk-modal-header">
-            <h2 class="uk-modal-title" id="detail-modal-title">Loading...</h2>
-            <p class="uk-article-meta">Written by <a href="#" id="detail-modal-author">User</a> on <span id="detail-modal-time">12 April 2012</span></p>
-        </div>
-
-        <div>
-             <img src="" id="detail-modal-cover">
-        </div>
-        <script>
-            var modalWidth=$('.uk-modal-dialog').width();
-            $('#detail-modal-cover').css('width',modalWidth);
-        </script> 
-        
-        <div class="uk-modal-body" uk-overflow-auto id="detail-modal-body">
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title display-4" id="detail-modal-title">Loading...</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p class="text-muted lead">Recorded by <span id="detail-modal-author">User</span> on <span class="font-italic"id="detail-modal-time">1 Jan 2017</span></p>            
+        <img id="detail-modal-cover" src="" class="img-fluid">
+        <div id="detail-modal-body" class="container p-5">
             Loading...
         </div>
-
-        <div class="uk-modal-footer uk-text-right">
-            <button class="uk-button uk-button-danger uk-modal-close" type="button">Close</button>
-        </div>
-
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
     </div>
+  </div>
 </div>
