@@ -1,3 +1,6 @@
+<link rel="stylesheet" href="{{asset('css/uikit.css')}}">
+<script src="{{asset('js/uikit.js')}}"></script>
+<script src="{{asset('js/uikit-icons.js')}}"></script>
 <div class="uk-card uk-card-default uk-grid-collapse uk-child-width-1-2@s uk-margin" uk-grid>
     <a href="#modal-media-image" uk-toggle>
         <div class="uk-card-media-left uk-cover-container">

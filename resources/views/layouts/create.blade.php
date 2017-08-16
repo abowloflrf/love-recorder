@@ -21,7 +21,7 @@
                                 <label for="body">Content</label>
                                 <textarea name="body" class="form-control" cols="30" rows="10"></textarea>
                             </div>
-                            @include('layouts.create.upload')
+                            @include('layouts.create.upload-new')
                             <div class="form-group">
                                 <input name="date_and_time" class="datepicker-here form-control" data-timepicker="true" data-language='zh' data-position="top left">
                                 <script>

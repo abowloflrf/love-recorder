@@ -12,13 +12,9 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/bundle.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="{{asset('css/uikit.css')}}">
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
     <!-- Scripts -->
-
     <script src="{{ asset('js/bundle.js') }}"></script>
-    <script src="{{asset('js/uikit.js')}}"></script>
-    <script src="{{asset('js/uikit-icons.js')}}"></script>
 
 </head>
 <body>
