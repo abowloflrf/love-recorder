@@ -23,119 +23,62 @@
                             <label for="body">Content</label>
                             <textarea name="body" class="form-control" cols="30" rows="10">{{$record->body}}</textarea>
                         </div>
-
-                        <div class="uk-card uk-card-default uk-grid-collapse uk-child-width-1-2@s uk-margin" uk-grid>
-                            <a href="#modal-media-image" uk-toggle>
-                                <div class="uk-card-media-left uk-cover-container">
-                                    <img src="{{$record->cover_img.'?imageView2/1/w/600/h/400'}}" alt="" uk-cover id="upload-img">
-                                    <canvas width="600" height="400"></canvas>
-                                </div>
-                                </a>
-                                <div>
-                                    <div class="uk-card-body">
-                                        <div class="test-upload uk-placeholder uk-text-center">
-                                            <span uk-icon="icon: cloud-upload"></span>
-                                            <span class="uk-text-middle">Attach binaries by dropping them here or</span>
-                                            <div uk-form-custom>
-                                                <input type="file" name="file" accept="image/*" id="file">
-                                                <span class="uk-link">selecting one</span>
-                                            </div>
-                                        </div> 
-                                        <progress id="progressbar" class="uk-progress" value="0" max="100" hidden></progress>
-                                        <p class="progress-text" hidden>Uploading......</p>
-                                    </div>
-                                </div>
-
-                            <div id="modal-media-image" class="uk-flex-top" uk-modal style="padding:40px 40px;">
-                                <div class="uk-modal-dialog uk-width-auto uk-margin-auto-vertical" >
-                                    <button class="uk-modal-close-outside" type="button" uk-close></button>
-                                    <img id="upload-img-modal" src="{{$record->cover_img}}" alt="">
-                                </div>
-                            </div>
-                            <script>
-                            (function ($) {
-
-                                var bar = $("#progressbar")[0];
-
-                                UIkit.upload('.test-upload', {
-                                    mime:'image/*',
-                                    'msg-invalid-mime':'File type not support!',
-                                    fail:function(msg){
-                                        UIkit.notification(msg,{status:'danger'});
-                                    },
-                                    url: '/records/{{$record->id}}/edit/change-img',
-                                    name:'file',
-                                    params:{
-                                        'id':{{$record->id}},
-                                        '_token':'{{csrf_token()}}'
-                                    },
-                                    beforeSend: function() { console.log('beforeSend', arguments);},
-                                    beforeAll: function() { 
-                                        console.log('beforeAll', arguments); 
-                                        if(arguments[1][0].size>=10485760){
-                                            UIkit.notification("File too large!",{status:'danger'});
-                                            throw new Error('Too large!');
-                                        }
-                                        if(arguments[1][0].type.substring(0,5)!='image'){
-                                            UIkit.notification("File type not support!",{status:'danger'});
-                                            throw new Error('File type not support!');
-                                        }
-                                    },
-                                    load: function() { console.log('load', arguments); },
-                                    error: function() { console.log('error', arguments); },
-                                    complete: function() { console.log('complete', arguments); },
-
-                                    loadStart: function (e) {
-                                        console.log('loadStart', arguments);
-
-                                        bar.removeAttribute('hidden');
-                                        $('.progress-text').removeAttr('hidden');
-                                        bar.max =  e.total;
-                                        bar.value =  e.loaded;
-                                    },
-
-                                    progress: function (e) {
-                                        console.log('progress', arguments);
-                                        bar.max =  e.total;
-                                        bar.value =  e.loaded;
-
-                                    },
-
-                                    loadEnd: function (e) {
-                                        console.log('loadEnd', arguments);
-
-                                        bar.max =  e.total;
-                                        bar.value =  e.loaded;
-                                    },
-
-                                    completeAll: function (arguments) {
-                                        console.log('completeAll', arguments);
-                                        var responseJSON=JSON.parse(arguments.responseText);   
-                                        var upload_img = responseJSON['key'];
-
-                                        setTimeout(function () {
-                                            bar.setAttribute('hidden', 'hidden');
-                                            $('.progress-text').attr('hidden', 'hidden');
-                                        }, 200);
-                                        if(responseJSON['key']!=null)
-                                        {
-                                            UIkit.notification(arguments.statusText,{status:'success'});
-                                            $('#upload-img').attr('src','http://oub090rig.bkt.clouddn.com/'+upload_img+"?imageView2/1/w/600/h/400/"+Math.random());
-                                            $('#upload-img-modal').attr('src','http://oub090rig.bkt.clouddn.com/'+upload_img+'?'+Math.random());
-                                            $('#cover-img').val('http://oub090rig.bkt.clouddn.com/'+upload_img);
-                                        }
-                                        else{
-                                            UIkit.notification(responseJSON['error'],{status:'danger'});
-                                            console.log(responseJSON['error']);
-                                        }
-                                        
-                                    }
-                                });
-
-                            })(jQuery);
-                            </script>
-                        </div>
                         
+
+                        <script src="{{asset('js/jquery.ui.widget.js')}}"></script>
+                        <script src="{{asset('js/jquery.fileupload.js')}}"></script>
+                        <script src="{{asset('js/jquery.fileupload-process.js')}}"></script>
+                        <script src="{{asset('js/jquery.fileupload-validate.js')}}"></script>
+                        <div class="form-group">
+                            <label class="custom-file">
+                                <input type="file" id="file-upload" name="file" class="custom-file-input" accept="image/*" multiple>
+                                <span class="custom-file-control"></span>
+                            </label>
+                            <div class="progress mt-3">
+                                <div class="progress-bar" role="progressbar" style="width:0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <img src="{{$record->cover_img}}?imageView2/1/w/300/h/200/" alt="upload" class="img-thumbnail mt-3 d-block">
+                        </div>
+
+                        <script>
+                        $(function () {
+                        $('#file-upload').fileupload({
+                            url:'/records/{{$record->id}}/edit/change-img',
+                            type:'POST',
+                            acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
+                            maxFileSize: 10000000,
+                            dataType: 'json',
+                            formData:{
+                                '_token':'{{csrf_token()}}'
+                            },
+                            done: function (e, data) {
+                                console.log(data);
+                            },
+                            done: function (e, data) {
+                                console.log(data);
+                                if(data._response.textStatus=="success"){
+                                    var upload_img=data._response.result.key;
+                                    $('#upload-img-input').val('http://oub090rig.bkt.clouddn.com/'+upload_img);
+                                    $('.img-thumbnail').attr('src','http://oub090rig.bkt.clouddn.com/'+upload_img+"?imageView2/1/w/300/h/200/"+Math.random());
+                                }else{
+                                    alert("Upload failed!");
+                                }
+
+                            },
+                            progressall: function (e, data) {
+                                var progress = parseInt(data.loaded / data.total * 100, 10);
+                                $('.progress-bar').css(
+                                    'width',
+                                    progress + '%'
+                                );
+                            },
+                            processfail: function (e, data) {
+                                alert(data.files[data.index].name + "\n" + data.files[data.index].error);
+                            }
+                        });
+                        });
+                        </script>
+
                         <div class="form-group">
                             <input name="date_and_time" class="datepicker-here form-control" data-timepicker="true" data-language='zh' data-position="top left" value="{{$record->date_and_time}}">
                         </div>

@@ -16,7 +16,6 @@
     </div>
 </div>
 <hr> -->
-
 <div class="card w-50 mx-auto mb-5" id="record-{{$record->id}}">
     <img class="card-img-top" src="{{$record->cover_img.'?imageView2/1/w/480/h/270'}}" alt="Cover">
     <div class="card-body">

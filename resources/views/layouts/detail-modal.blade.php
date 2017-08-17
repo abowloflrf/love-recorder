@@ -15,6 +15,9 @@
         </div>
       </div>
       <div class="modal-footer">
+        @if(Auth::check()&&Auth::user()->member<3)
+          <a href="" id="edit-button" class="btn btn-secondary">Edit</a>
+        @endif
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
       </div>
     </div>
