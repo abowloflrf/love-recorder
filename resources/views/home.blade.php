@@ -21,7 +21,7 @@
         <h1 class="text-center">We have been together for:</h1>
         <h1 class="text-center"><span id="love-time-d"></span> Days <span id="love-time-h"></span>Hours <span id="love-time-m"></span>Minutes <span id="love-time-s"></span>Seconds</h1>
         <script>
-            var lovedate=new Date(2017,1,1);
+            var lovedate=new Date(2017,0,1);
             setInterval(function(){
                 var datenow = new Date();
                 var duration=datenow-lovedate;
