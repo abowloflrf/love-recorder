@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 //引入七牛sdk
 use Qiniu\Auth;
 use Qiniu\Storage\UploadManager;
+use Qiniu\Storage\BucketManager;
 
 class RecordController extends Controller
 {
@@ -18,7 +19,7 @@ class RecordController extends Controller
         }elseif (auth()->user()->member<3){
             return view('layouts.create');
         }else{
-            return view('auth.permisson-deny');
+            return view('auth.permission-deny');
         }
     }
 
@@ -79,7 +80,7 @@ class RecordController extends Controller
             $record=Record::find($id);
             return view('edit',compact('record'));
         }else{
-            return view('auth.permisson-deny');
+            return view('auth.permission-deny');
         }
     }
     public function changeImg(Request $request)
@@ -125,6 +126,24 @@ class RecordController extends Controller
         $record->cover_img=request('cover_img');
         $record->save();
 
+        return redirect('/home');
+    }
+
+    public function delete(Record $record)
+    {   
+        $accessKey = env('QINIU_ACCESSKEY');
+        $secretKey = env('QINIU_SECRETKEY');
+        $auth = new Auth($accessKey, $secretKey);
+        //初始化BucketManager
+        $bucketMgr = new BucketManager($auth);
+        //你要测试的空间， 并且这个key在你空间中存在
+        $bucket="love-recorder";
+        $key = 'record/'.$record->id.'/recorder-img';
+        $err = $bucketMgr->delete($bucket, $key);
+        if ($err !== null) {
+            echo json_encode($err->getResponse());
+        }
+        $record->delete();
         return redirect('/home');
     }
 

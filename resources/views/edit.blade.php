@@ -9,6 +9,12 @@
             <div class="card">  
             <div class="card-header">
                 Editing a record...
+                <form class="float-right" action="/records/{{$record->id}}" method="post" onsubmit="return confirm('确认要删除?');">
+                    {{csrf_field()}}
+                    {{method_field('DELETE')}}
+                    <button class="btn btn-danger" type="submit">Delete this record</button>
+                </form>
+                
             </div>
                 <div class="card-body">
                     <form action="/records/{{$record->id}}" method="post">

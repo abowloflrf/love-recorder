@@ -25,6 +25,7 @@ Route::post('/records','RecordController@store');
 Route::get('/records/{id}/edit','RecordController@editView')->name('edit');
 Route::post('/records/{id}/edit/change-img','RecordController@changeImg');
 Route::put('/records/{id}','RecordController@update');
+Route::delete('/records/{record}','RecordController@delete')->middleware('admin');
 
 //apis
 Route::get('/api/records',function (){

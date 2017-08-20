@@ -30,4 +30,13 @@ class User extends Authenticatable
     public function record(){
         return $this->hasMany(Record::class);
     }
+
+    public function isAdmin()
+    {
+        if($this->member<3){
+            return true;
+        }else{
+            return false;
+        }
+    }
 }
