@@ -51,6 +51,9 @@ body {
     font-family:"Calibri Light","Segoe UI","Microsoft YaHei UI Light",sans-serif;
 }
 
+.love-time h1:nth-child(2){
+    font-size: 48px;
+}
 @media screen and (max-width:576px){
     .love-time h1{
         font-size: 32px;
@@ -58,7 +61,7 @@ body {
     .love-time span{
         font-size: 32px;
     }
-    .love-time h1:nth-child(3){
+    .love-time h1:nth-child(2){
         font-size: 20px;
     }
 }
