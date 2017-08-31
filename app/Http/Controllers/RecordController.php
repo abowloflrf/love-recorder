@@ -26,8 +26,9 @@ class RecordController extends Controller
     public function store()
     {
         $this->validate(request(),[
-            'title'=>'required|max:50',
-            'body'=>'required',
+            'title'=>'required|max:30',
+            'body'=>'required|max:140',
+            'cover_img'=>'required',
             'date_and_time'=>'required'
         ]);
 
@@ -38,6 +39,7 @@ class RecordController extends Controller
             'user_id'=>auth()->user()->id,
             'date_and_time'=>request('date_and_time')
         ]);
+
         return redirect('/home');
     }
 
@@ -115,10 +117,12 @@ class RecordController extends Controller
     public function update()
     {
         $this->validate(request(),[
-            'title'=>'required|max:50',
-            'body'=>'required',
+            'title'=>'required|max:30',
+            'body'=>'required|max:140',
+            'cover_img'=>'required',
             'date_and_time'=>'required'
         ]);
+
         $record=Record::find(request('record_id'));
         $record->title=request('title');
         $record->body=request('body');

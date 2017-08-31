@@ -11,6 +11,19 @@ body {
     margin-bottom: 60px;
     min-height: 100%;
 }
+
+.love-time h1{
+    font-size: 72px;
+    font-family: 'Lobster', cursive;
+}
+.love-time h1:nth-child(3){
+    font-size: 48px;
+}
+.love-time span{
+    color: #6C567B;
+    font-size: 72px;
+}
+
 .footer {
     position: absolute;
     bottom: 0;
@@ -36,4 +49,29 @@ body {
 
 .uk-badge{
     font-family:"Calibri Light","Segoe UI","Microsoft YaHei UI Light",sans-serif;
+}
+
+@media screen and (max-width:576px){
+    .love-time h1{
+        font-size: 32px;
+    }
+    .love-time span{
+        font-size: 32px;
+    }
+    .love-time h1:nth-child(3){
+        font-size: 20px;
+    }
+}
+
+img#detail-modal-cover{
+    padding: 4px;
+    border: 1px solid #ddd;
+}
+#detail-modal-body{
+    font-size: 1.5em;
+}
+@media screen and (max-width:576px){
+    #detail-modal-body{
+        font-size: 1em;
+    }
 }

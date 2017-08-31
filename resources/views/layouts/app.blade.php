@@ -13,6 +13,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/bundle.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
+    <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
     <!-- Scripts -->
     <script src="{{ asset('js/bundle.js') }}"></script>
 
@@ -22,7 +23,7 @@
         <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
             <div class="container">
                     <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/home') }}">
+                    <a class="navbar-brand" href="{{ url('/home') }}" style="font-family:Lobster">
                         {{ config('app.name', 'Laravel') }}
                     </a>
                     <!-- Collapsed Hamburger -->

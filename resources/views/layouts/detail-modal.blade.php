@@ -2,7 +2,7 @@
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h2 class="modal-title display-4" id="detail-modal-title">Loading...</h5>
+        <h2 class="modal-title" id="detail-modal-title">Loading...</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -10,7 +10,7 @@
       <div class="modal-body">
         <p class="text-muted lead">Recorded by <span id="detail-modal-author">User</span> on <span class="font-italic"id="detail-modal-time">1 Jan 2017</span></p>            
         <img id="detail-modal-cover" src="" class="img-fluid">
-        <div id="detail-modal-body" class="container p-5">
+        <div id="detail-modal-body" class="container p-3">
             Loading...
         </div>
       </div>

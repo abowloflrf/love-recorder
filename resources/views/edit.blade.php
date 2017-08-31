@@ -95,9 +95,8 @@
 
                         <div class="form-group">
                             @foreach($errors->all() as $err)
-                            <div class="uk-alert-danger" uk-alert>
-                                <a class="uk-alert-close" uk-close></a>
-                                <p>{{$err}}</p>
+                            <div class="alert alert-danger" role="alert">
+                                {{$err}}
                             </div>
                             @endforeach
                         </div>

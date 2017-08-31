@@ -19,7 +19,7 @@
 
     <div class="love-time mt-3">
         <h1 class="text-center">We have been together for:</h1>
-        <h1 class="text-center"><span id="love-time-d"></span> Days <span id="love-time-h"></span>Hours <span id="love-time-m"></span>Minutes <span id="love-time-s"></span>Seconds</h1>
+        <h1 class="text-center"><span id="love-time-d"></span>Days <span id="love-time-h"></span>H <span id="love-time-m"></span>M <span id="love-time-s"></span>S</h1>
         <script>
             var lovedate=new Date(2017,0,1);
             setInterval(function(){

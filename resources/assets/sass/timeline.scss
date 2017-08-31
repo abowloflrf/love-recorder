@@ -190,6 +190,7 @@
   }
   .cd-timeline-content h2 {
     color: #303e49;
+    font-size: 20px;
   }
   .cd-timeline-content p, .cd-timeline-content .cd-date {
     font-size: 13px;
@@ -220,8 +221,7 @@
   }
   @media only screen and (min-width: 768px) {
     .cd-timeline-content h2 {
-      font-size: 20px;
-      font-size: 1.25rem;
+      font-size: 1.8rem;
     }
     .cd-timeline-content p {
       font-size: 16px;
@@ -290,5 +290,10 @@
   }
  
 .cd-timeline-body{
-    padding: 1.6em
+    padding: 1em;
+}
+@media only screen and (min-width: 768px) {
+  .cd-timeline-body{
+      padding: 1.5em;
+  }
 }
