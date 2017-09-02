@@ -22,19 +22,19 @@
                         {{csrf_field()}}
                         <input type="hidden" name="record_id" value="{{$record->id}}">   
                         <div class="form-group">
-                            <label for="title">Title</label>
-                            <input class="form-control" type="text" name="title" value="{{$record->title}}">
+                            <label for="title">Title (30)</label>
+                            <input class="form-control" type="text" name="title" value="{{$record->title}}" reqired autofocus>
                         </div>
                         <div class="form-group">
-                            <label for="body">Content</label>
-                            <textarea name="body" class="form-control" cols="30" rows="10">{{$record->body}}</textarea>
+                            <label for="body">Content (140)</label>
+                            <textarea name="body" class="form-control" cols="30" rows="10" reqired>{{$record->body}}</textarea>
                         </div>
-                        
 
                         <script src="{{asset('js/jquery.ui.widget.js')}}"></script>
                         <script src="{{asset('js/jquery.fileupload.js')}}"></script>
                         <script src="{{asset('js/jquery.fileupload-process.js')}}"></script>
                         <script src="{{asset('js/jquery.fileupload-validate.js')}}"></script>
+
                         <div class="form-group">
                             <label class="custom-file">
                                 <input type="file" id="file-upload" name="file" class="custom-file-input" accept="image/*" multiple>
@@ -48,47 +48,47 @@
 
                         <script>
                         $(function () {
-                        $('#file-upload').fileupload({
-                            url:'/records/{{$record->id}}/edit/change-img',
-                            type:'POST',
-                            acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
-                            maxFileSize: 10000000,
-                            dataType: 'json',
-                            formData:{
-                                '_token':'{{csrf_token()}}'
-                            },
-                            done: function (e, data) {
-                                console.log(data);
-                            },
-                            done: function (e, data) {
-                                console.log(data);
-                                if(data._response.textStatus=="success"){
-                                    var upload_img=data._response.result.key;
-                                    $('#upload-img-input').val('http://oub090rig.bkt.clouddn.com/'+upload_img);
-                                    $('.img-thumbnail').attr('src','http://oub090rig.bkt.clouddn.com/'+upload_img+"?imageView2/1/w/300/h/200/"+Math.random());
-                                }else{
-                                    alert("Upload failed!");
-                                }
+                            $('#file-upload').fileupload({
+                                url:'/records/{{$record->id}}/edit/change-img',
+                                type:'POST',
+                                acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
+                                maxFileSize: 10000000,
+                                dataType: 'json',
+                                formData:{
+                                    '_token':'{{csrf_token()}}'
+                                },
+                                done: function (e, data) {
+                                    console.log(data);
+                                },
+                                done: function (e, data) {
+                                    console.log(data);
+                                    if(data._response.textStatus=="success"){
+                                        var upload_img=data._response.result.key;
+                                        $('#upload-img-input').val('http://oub090rig.bkt.clouddn.com/'+upload_img);
+                                        $('.img-thumbnail').attr('src','http://oub090rig.bkt.clouddn.com/'+upload_img+"?imageView2/1/w/300/h/200/"+Math.random());
+                                    }else{
+                                        alert("Upload failed!");
+                                    }
 
-                            },
-                            progressall: function (e, data) {
-                                var progress = parseInt(data.loaded / data.total * 100, 10);
-                                $('.progress-bar').css(
-                                    'width',
-                                    progress + '%'
-                                );
-                            },
-                            processfail: function (e, data) {
-                                alert(data.files[data.index].name + "\n" + data.files[data.index].error);
-                            }
-                        });
+                                },
+                                progressall: function (e, data) {
+                                    var progress = parseInt(data.loaded / data.total * 100, 10);
+                                    $('.progress-bar').css(
+                                        'width',
+                                        progress + '%'
+                                    );
+                                },
+                                processfail: function (e, data) {
+                                    alert(data.files[data.index].name + "\n" + data.files[data.index].error);
+                                }
+                            });
                         });
                         </script>
 
                         <div class="form-group">
-                            <input name="date_and_time" class="datepicker-here form-control" data-timepicker="true" data-language='zh' data-position="top left" value="{{$record->date_and_time}}">
+                            <input name="date_and_time" class="datepicker-here form-control" data-timepicker="true" data-language='zh' data-position="top left" value="{{$record->date_and_time}}" reqired>
                         </div>
-                        <input type="hidden" name="cover_img" id="cover_img" value="{{$record->cover_img}}">                        
+                        <input type="hidden" name="cover_img" id="cover_img" value="{{$record->cover_img}}" reqired>                        
                         <div class="form-group">
                             <button class="btn btn-primary" type="submit">Submit</button>
                         </div>
