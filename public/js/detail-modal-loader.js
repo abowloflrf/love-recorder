@@ -1,6 +1,6 @@
 function loadDetailModal(e) {
     var record_id =$(e).parent().parent().parent().attr('id').split('-',2)[1];
-    
+
     $.ajax({
         method:'GET',
         url:'api/records/'+record_id
@@ -13,3 +13,6 @@ function loadDetailModal(e) {
         $('#edit-button').attr('href','/records/'+record_id+'/edit');
     })
 }
+$("#detail-modal").on('hidden.bs.modal', function (e) {
+    $(this).removeData("bs.modal");
+})

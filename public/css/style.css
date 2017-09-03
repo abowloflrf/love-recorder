@@ -67,6 +67,7 @@ body {
 }
 
 img#detail-modal-cover{
+    width:100%;
     padding: 4px;
     border: 1px solid #ddd;
 }
