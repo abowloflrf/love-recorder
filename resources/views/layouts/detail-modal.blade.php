@@ -8,7 +8,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <p class="text-muted lead">Recorded by <span id="detail-modal-author">User</span> on <span class="font-italic"id="detail-modal-time">1 Jan 2017</span></p>            
+        <p id="detail-modal-meta" class="text-muted lead">Recorded by <span id="detail-modal-author">User</span> on <span class="font-italic"id="detail-modal-time">1 Jan 2017</span></p>            
         <img id="detail-modal-cover" src="" class="img-fluid">
         <div id="detail-modal-body" class="container p-3">
             Loading...

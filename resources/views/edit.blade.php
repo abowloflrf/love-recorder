@@ -43,7 +43,7 @@
                             <div class="progress mt-3">
                                 <div class="progress-bar" role="progressbar" style="width:0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
-                            <img src="{{$record->cover_img}}?imageView2/1/w/300/h/200/" alt="upload" class="img-thumbnail mt-3 d-block">
+                            <img src="{{$record->cover_img.'?imageView2/1/w/300/h/200/'.uniqid()}}" alt="upload" class="img-thumbnail mt-3 d-block">
                         </div>
 
                         <script>

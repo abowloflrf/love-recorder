@@ -13,7 +13,6 @@
     <!-- Styles -->
     <link href="{{ asset('css/bundle.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
-    <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
     <!-- Scripts -->
     <script src="{{ asset('js/bundle.js') }}"></script>
 
