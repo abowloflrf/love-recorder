@@ -9,6 +9,9 @@ use Illuminate\Support\Facades\DB;
 use Qiniu\Auth;
 use Qiniu\Storage\UploadManager;
 use Qiniu\Storage\BucketManager;
+//引入又拍云sdk
+use Upyun\Upyun;
+use Upyun\Config;
 
 class RecordController extends Controller
 {
@@ -43,35 +46,52 @@ class RecordController extends Controller
         return redirect('/home');
     }
 
+    // public function imgUpload(Request $request)
+    // {
+
+    //     $nextID=DB::select("show table status like 'records'")[0]->Auto_increment;
+    //     $bucket="love-recorder";
+    //     $accessKey = env('QINIU_ACCESSKEY');
+    //     $secretKey = env('QINIU_SECRETKEY');
+    //     $auth = new Auth($accessKey, $secretKey);
+    //         //上传策略
+    //         $policy = array(
+    //              //指定scope为bucket:key,key为record/id/recorder-img
+    //              "scope"=>"love-recorder:record/".$nextID."/recorder-img",
+    //              //指定文件上传文件类型为图片
+    //              "mimeLimit"=>"image/*",
+    //              //指定上传文件最大为10m
+    //              "fsizeLimit"=>10485760
+    //             );
+    //     $upToken = $auth->uploadToken($bucket, 'record/'.$nextID.'/recorder-img', 3600, $policy);
+    //     //上传文件的本地路径
+    //     $filePath = $request->file('file')->getPathname();
+    //     $fileName = $request->file('file')->getClientOriginalName();
+        
+    //     $uploadMgr = new UploadManager();
+    //     list($ret, $err) = $uploadMgr->putFile($upToken,'record/'.$nextID.'/recorder-img',$filePath);
+    //     if ($err !== null) {
+    //         return json_encode($err->getResponse());
+    //     } else {
+    //         return json_encode($ret);
+    //     }
+    // }
+
     public function imgUpload(Request $request)
     {
+        $bucketConfig = new Config('ruofeng-img', env('UPYUN_OPERATOR'), env('UPYUN_PASSWORD'));
+        $client = new Upyun($bucketConfig);
 
-        $nextID=DB::select("show table status like 'records'")[0]->Auto_increment;
-        $bucket="love-recorder";
-        $accessKey = env('QINIU_ACCESSKEY');
-        $secretKey = env('QINIU_SECRETKEY');
-        $auth = new Auth($accessKey, $secretKey);
-            //上传策略
-            $policy = array(
-                 //指定scope为bucket:key,key为record/id/recorder-img
-                 "scope"=>"love-recorder:record/".$nextID."/recorder-img",
-                 //指定文件上传文件类型为图片
-                 "mimeLimit"=>"image/*",
-                 //指定上传文件最大为10m
-                 "fsizeLimit"=>10485760
-                );
-        $upToken = $auth->uploadToken($bucket, 'record/'.$nextID.'/recorder-img', 3600, $policy);
-        //上传文件的本地路径
         $filePath = $request->file('file')->getPathname();
         $fileName = $request->file('file')->getClientOriginalName();
-        
-        $uploadMgr = new UploadManager();
-        list($ret, $err) = $uploadMgr->putFile($upToken,'record/'.$nextID.'/recorder-img',$filePath);
-        if ($err !== null) {
-            return json_encode($err->getResponse());
-        } else {
-            return json_encode($ret);
-        }
+        $nextID=DB::select("show table status like 'records'")[0]->Auto_increment;
+
+        $file = fopen($filePath, 'r');
+        //上传文件
+        $saveKey="record/".$nextID."/".$fileName;
+        $res = $client->write($saveKey, $file);
+        $res['file']=$saveKey;
+        return json_encode($res);
     }
 
     public function editView($id)
