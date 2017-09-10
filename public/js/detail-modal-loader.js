@@ -9,7 +9,7 @@ function loadDetailModal(e) {
         $('#detail-modal-body').text(data.body);
         $('#detail-modal-author').text(data.user_name);
         $('#detail-modal-time').text(data.date_and_time);
-        $('#detail-modal-cover').attr('src',data.cover_img+'?imageView2/2/q/75/ignore-error/1/'+Math.random());
+        $('#detail-modal-cover').attr('src',data.cover_img+'!view?'+Math.random());
         $('#edit-button').attr('href','/records/'+record_id+'/edit');
     })
 }

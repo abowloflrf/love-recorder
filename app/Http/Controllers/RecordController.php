@@ -46,37 +46,6 @@ class RecordController extends Controller
         return redirect('/home');
     }
 
-    // public function imgUpload(Request $request)
-    // {
-
-    //     $nextID=DB::select("show table status like 'records'")[0]->Auto_increment;
-    //     $bucket="love-recorder";
-    //     $accessKey = env('QINIU_ACCESSKEY');
-    //     $secretKey = env('QINIU_SECRETKEY');
-    //     $auth = new Auth($accessKey, $secretKey);
-    //         //上传策略
-    //         $policy = array(
-    //              //指定scope为bucket:key,key为record/id/recorder-img
-    //              "scope"=>"love-recorder:record/".$nextID."/recorder-img",
-    //              //指定文件上传文件类型为图片
-    //              "mimeLimit"=>"image/*",
-    //              //指定上传文件最大为10m
-    //              "fsizeLimit"=>10485760
-    //             );
-    //     $upToken = $auth->uploadToken($bucket, 'record/'.$nextID.'/recorder-img', 3600, $policy);
-    //     //上传文件的本地路径
-    //     $filePath = $request->file('file')->getPathname();
-    //     $fileName = $request->file('file')->getClientOriginalName();
-        
-    //     $uploadMgr = new UploadManager();
-    //     list($ret, $err) = $uploadMgr->putFile($upToken,'record/'.$nextID.'/recorder-img',$filePath);
-    //     if ($err !== null) {
-    //         return json_encode($err->getResponse());
-    //     } else {
-    //         return json_encode($ret);
-    //     }
-    // }
-
     public function imgUpload(Request $request)
     {
         $bucketConfig = new Config('ruofeng-img', env('UPYUN_OPERATOR'), env('UPYUN_PASSWORD'));
@@ -105,33 +74,21 @@ class RecordController extends Controller
             return view('auth.permission-deny');
         }
     }
+
     public function changeImg(Request $request)
     {
-        $bucket="love-recorder";
-        $accessKey = env('QINIU_ACCESSKEY');
-        $secretKey = env('QINIU_SECRETKEY');
-        $auth = new Auth($accessKey, $secretKey);
-            //上传策略
-            $policy = array(
-                 //指定scope为bucket:key,key为record/id/recorder-img
-                 "scope"=>"love-recorder:record/".$request->id."/recorder-img",
-                 //指定文件上传文件类型为图片
-                 "mimeLimit"=>"image/*",
-                 //指定上传文件最大为10m
-                 "fsizeLimit"=>10485760
-                );
-        $upToken = $auth->uploadToken($bucket, 'record/'.$request->id.'/recorder-img', 3600, $policy);
-        //上传文件的本地路径
+        $bucketConfig = new Config('ruofeng-img', env('UPYUN_OPERATOR'), env('UPYUN_PASSWORD'));
+        $client = new Upyun($bucketConfig);
+
         $filePath = $request->file('file')->getPathname();
         $fileName = $request->file('file')->getClientOriginalName();
-        
-        $uploadMgr = new UploadManager();
-        list($ret, $err) = $uploadMgr->putFile($upToken,'record/'.$request->id.'/recorder-img',$filePath);
-        if ($err !== null) {
-            return json_encode($err->getResponse());
-        } else {
-            return json_encode($ret);
-        }
+
+        $file = fopen($filePath, 'r');
+        //上传文件
+        $saveKey="record/".$request->id."/".$fileName;
+        $res = $client->write($saveKey, $file);
+        $res['file']=$saveKey;
+        return json_encode($res);
     }
 
     public function update()
@@ -155,18 +112,16 @@ class RecordController extends Controller
 
     public function delete(Record $record)
     {   
-        $accessKey = env('QINIU_ACCESSKEY');
-        $secretKey = env('QINIU_SECRETKEY');
-        $auth = new Auth($accessKey, $secretKey);
-        //初始化BucketManager
-        $bucketMgr = new BucketManager($auth);
-        //你要测试的空间， 并且这个key在你空间中存在
-        $bucket="love-recorder";
-        $key = 'record/'.$record->id.'/recorder-img';
-        $err = $bucketMgr->delete($bucket, $key);
-        if ($err !== null) {
-            echo json_encode($err->getResponse());
-        }
+        $bucketConfig = new Config('ruofeng-img', env('UPYUN_OPERATOR'), env('UPYUN_PASSWORD'));
+        $client = new Upyun($bucketConfig);
+        //截取图片的url前面部分，获得在又拍云储存空间中图片相应的位置
+        $fileKey=substr($record->cover_img,34);
+        //删除相应图片
+        //$resFile=$client->delete($fileKey);
+        //获取record图片所在目录并删除相应目录
+        $fileDir="/record/".$record->id;
+        //$resDir=$client->deleteDir($fileDir);
+        //删除数据库中的记录
         $record->delete();
         return redirect('/home');
     }

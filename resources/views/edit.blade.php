@@ -43,7 +43,7 @@
                             <div class="progress mt-3">
                                 <div class="progress-bar" role="progressbar" style="width:0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
-                            <img src="{{$record->cover_img.'?imageView2/1/w/300/h/200/'.uniqid()}}" alt="upload" class="img-thumbnail mt-3 d-block">
+                            <img src="{{$record->cover_img.'!thumbnail?'.uniqid()}}" alt="upload" class="img-thumbnail mt-3 d-block" style="width:200px">
                         </div>
 
                         <script>
@@ -58,14 +58,10 @@
                                     '_token':'{{csrf_token()}}'
                                 },
                                 done: function (e, data) {
-                                    console.log(data);
-                                },
-                                done: function (e, data) {
-                                    console.log(data);
                                     if(data._response.textStatus=="success"){
-                                        var upload_img=data._response.result.key;
-                                        $('#upload-img-input').val('http://oub090rig.bkt.clouddn.com/'+upload_img);
-                                        $('.img-thumbnail').attr('src','http://oub090rig.bkt.clouddn.com/'+upload_img+"?imageView2/1/w/300/h/200/"+Math.random());
+                                        var upload_img=data.result.file;
+                                        $('#cover_img').val('https://ruofeng-img.b0.upaiyun.com/'+upload_img);
+                                        $('.img-thumbnail').attr('src','https://ruofeng-img.b0.upaiyun.com/'+upload_img+'!thumbnail'+'?'+Math.random());
                                     }else{
                                         alert("Upload failed!");
                                     }

@@ -4,7 +4,7 @@
     </div> <!-- cd-timeline-img -->
 
     <div class="cd-timeline-content" id="record-{{$record->id}}">
-        <img src="{{$record->cover_img.'?imageView2/1/w/480/h/270/'.uniqid()}}" style="width:100%;border-radius:4px 4px 0 0;background-color:#eee;">
+        <img src="{{$record->cover_img.'!card?'.uniqid()}}" style="width:100%;border-radius:4px 4px 0 0;background-color:#eee;">
         <div class="cd-timeline-body">
             <h2>{{$record->title}}</h2>
             <p class="text-truncate">{{$record->body}}</p>
