@@ -12,6 +12,8 @@ use Qiniu\Storage\BucketManager;
 //引入又拍云sdk
 use Upyun\Upyun;
 use Upyun\Config;
+//引入腾讯云sdk
+use QCloud\Cos\Api;
 
 class RecordController extends Controller
 {
@@ -48,19 +50,36 @@ class RecordController extends Controller
 
     public function imgUpload(Request $request)
     {
-        $bucketConfig = new Config('ruofeng-img', env('UPYUN_OPERATOR'), env('UPYUN_PASSWORD'));
-        $client = new Upyun($bucketConfig);
+        // $bucketConfig = new Config('ruofeng-img', env('UPYUN_OPERATOR'), env('UPYUN_PASSWORD'));
+        // $client = new Upyun($bucketConfig);
+
+        // $filePath = $request->file('file')->getPathname();
+        // $fileName = $request->file('file')->getClientOriginalName();
+        // $nextID=DB::select("show table status like 'records'")[0]->Auto_increment;
+
+        // $file = fopen($filePath, 'r');
+        // //上传文件
+        // $saveKey="record/".$nextID."/".$fileName;
+        // $res = $client->write($saveKey, $file);
+        // $res['file']=$saveKey;
+        // return json_encode($res);
+        $config = array(
+            'app_id' => env('COS_APPID'),
+            'secret_id' => env('COS_SECRETID'),
+            'secret_key' => env('COS_SECRETKEY'),
+            'region' => 'sh',
+            'timeout' => 200
+        );
+        $cosApi = new Api($config);
 
         $filePath = $request->file('file')->getPathname();
         $fileName = $request->file('file')->getClientOriginalName();
         $nextID=DB::select("show table status like 'records'")[0]->Auto_increment;
-
-        $file = fopen($filePath, 'r');
-        //上传文件
-        $saveKey="record/".$nextID."/".$fileName;
-        $res = $client->write($saveKey, $file);
-        $res['file']=$saveKey;
-        return json_encode($res);
+        $saveKey='/record/'.$nextID.'/'.$fileName;
+        // 上传文件
+        $ret = $cosApi->upload(env('COS_BUCKET'), $filePath, $saveKey);
+        $ret['saveKey']=$saveKey;      
+        return $ret;
     }
 
     public function editView($id)
