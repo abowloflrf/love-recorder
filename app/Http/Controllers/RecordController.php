@@ -5,13 +5,7 @@ namespace App\Http\Controllers;
 use App\Record;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-//引入七牛sdk
-use Qiniu\Auth;
-use Qiniu\Storage\UploadManager;
-use Qiniu\Storage\BucketManager;
-//引入又拍云sdk
-use Upyun\Upyun;
-use Upyun\Config;
+
 //引入腾讯云sdk
 use QCloud\Cos\Api;
 //引入Faker
@@ -87,18 +81,6 @@ class RecordController extends Controller
 
     public function changeImg(Request $request)
     {
-        // $bucketConfig = new Config('ruofeng-img', env('UPYUN_OPERATOR'), env('UPYUN_PASSWORD'));
-        // $client = new Upyun($bucketConfig);
-
-        // $filePath = $request->file('file')->getPathname();
-        // $fileName = $request->file('file')->getClientOriginalName();
-
-        // $file = fopen($filePath, 'r');
-        // //上传文件
-        // $saveKey="record/".$request->id."/".$fileName;
-        // $res = $client->write($saveKey, $file);
-        // $res['file']=$saveKey;
-        // return json_encode($res);
         //TODO: 验证上传文件类型，大小，否则返回错误
         $config = array(
             'app_id' => env('COS_APPID'),
@@ -146,16 +128,12 @@ class RecordController extends Controller
             'region' => 'sh',
             'timeout' => 200
         );
-        $cosApi = new Api($config);
-        //截取图片的url前面部分，获得在又拍云储存空间中图片相应的位置
-        $fileKey=substr($record->cover_img,50);
-        //删除相应图片
-        //$resFile=$client->delete($fileKey);
-        //获取record图片所在目录并删除相应目录
+
+        //获取当前record所在目录
         $fileDir='/record/'.$record->id.'/';
-        //$resDir=$client->deleteDir($fileDir);
-        //删除数据库中的记录
+        //列出当前目录所有文件
         $result = $cosApi->listFolder(env('COS_BUCKET'), $fileDir,null,null,'eListFileOnly');
+        //逐个删除目录中的文件
         $files=$result['data']['infos'];
         foreach($files as $file)
         {
