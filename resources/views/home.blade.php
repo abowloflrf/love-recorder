@@ -10,7 +10,8 @@
                 <div class="card-body">
                     @if(!auth()->check())<b>guest</b>
                     @elseif(auth()->user()->member=='1')<b>lucky girl</b>
-                    @else<b>lucky boy</b>
+                    @elseif(auth()->user()->member=='1')<b>lucky boy</b>
+                    @else<b>{{auth()->user()->name}}</b>
                     @endif
                 </div>
             </div>
@@ -40,9 +41,17 @@
     </div>
     
     <section id="cd-timeline" class="cd-container">
-        @foreach($records as $record)
-            @include('layouts.timeline-card')
-        @endforeach
+        @if(!auth()->check()||auth()->user()->member==3)
+            @foreach($records as $record)
+                @if(!$record->private)
+                    @include('layouts.timeline-card')
+                @endif
+            @endforeach
+        @elseif(auth()->user()->member<3)
+            @foreach($records as $record)
+                @include('layouts.timeline-card')
+            @endforeach
+        @endif
     </section> <!-- cd-timeline -->
 </div>
 </body>

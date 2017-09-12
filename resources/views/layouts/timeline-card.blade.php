@@ -1,7 +1,13 @@
 <div class="cd-timeline-block">
-    <div class="cd-timeline-img cd-picture">
-        <img src="{{asset('img/heart.svg')}}" alt="Picture">
-    </div> <!-- cd-timeline-img -->
+    @if($record->private==0)
+        <div class="cd-timeline-img cd-green">
+            <img src="{{asset('img/heart.svg')}}" alt="Heart">
+        </div>
+    @else
+        <div class="cd-timeline-img cd-red">
+            <img src="{{asset('img/lock.svg')}}" alt="Lock">
+        </div>
+    @endif
 
     <div class="cd-timeline-content" id="record-{{$record->id}}">
         <img src="{{$record->cover_img.'/timeline'}}" style="width:100%;border-radius:4px 4px 0 0;background-color:#eee;">

@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Support\Facades\Auth;
 
 class CheckAdmin
 {
@@ -15,9 +16,9 @@ class CheckAdmin
      */
     public function handle($request, Closure $next)
     {
-        if ($request->user()->member>2) {
+        if (!auth()->check()||auth()->user()->member>2) {
             // Redirect...
-            return view('auth.permission-deny');
+            return redirect('/home');
         }
 
         return $next($request);
