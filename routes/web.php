@@ -28,8 +28,5 @@ Route::put('/records/{id}','RecordController@update');
 Route::delete('/records/{record}','RecordController@delete')->middleware('admin');
 
 //apis
-Route::get('/api/records',function (){
-    return \App\Record::all();
-});
 Route::get('/api/records/{record}','RecordController@getRecord');
 

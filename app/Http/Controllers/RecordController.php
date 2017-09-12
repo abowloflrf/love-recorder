@@ -158,10 +158,7 @@ class RecordController extends Controller
 //apis
     public function getRecord(Record $record){
         if($record->private&&(!Auth::check()||auth()->user()->member==3)){
-            $data=[
-                "message"=>"404"
-            ];
-            return $data;
+            abort(404);
         };
         $data=[
             "title"=>$record->title,
