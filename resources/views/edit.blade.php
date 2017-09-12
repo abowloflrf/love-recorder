@@ -43,7 +43,7 @@
                             <div class="progress mt-3">
                                 <div class="progress-bar" role="progressbar" style="width:0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
-                            <img src="{{$record->cover_img.'!thumbnail?'.uniqid()}}" alt="upload" class="img-thumbnail mt-3 d-block" style="width:200px">
+                            <img src="{{$record->cover_img.'/thumb?'}}" alt="upload" class="img-thumbnail mt-3 d-block" style="width:200px">
                         </div>
 
                         <script>
@@ -58,12 +58,12 @@
                                     '_token':'{{csrf_token()}}'
                                 },
                                 done: function (e, data) {
-                                    if(data._response.textStatus=="success"){
-                                        var upload_img=data.result.file;
-                                        $('#cover_img').val('https://ruofeng-img.b0.upaiyun.com/'+upload_img);
-                                        $('.img-thumbnail').attr('src','https://ruofeng-img.b0.upaiyun.com/'+upload_img+'!thumbnail'+'?'+Math.random());
+                                    if(data.result.message=="SUCCESS"){
+                                        var upload_img=data.result.saveKey;
+                                        $('#cover_img').val('https://loverecorder-1251779005.picsh.myqcloud.com'+upload_img);
+                                        $('.img-thumbnail').attr('src','https://loverecorder-1251779005.picsh.myqcloud.com'+upload_img+'/thumb');
                                     }else{
-                                        alert("Upload failed!");
+                                        alert("Upload failed!\n"+data.result.message);
                                     }
 
                                 },

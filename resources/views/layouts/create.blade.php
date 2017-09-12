@@ -15,11 +15,11 @@
                             {{csrf_field()}}
                             <div class="form-group">
                                 <label for="title">Title (30)</label>
-                                <input class="form-control" type="text" name="title" required autofocus>
+                                <input class="form-control" type="text" name="title" value="{{$faker->text($maxNbChars = 30)}}" required autofocus>
                             </div>
                             <div class="form-group">
                                 <label for="body">Content (140)</label>
-                                <textarea name="body" class="form-control" cols="30" rows="10" required></textarea>
+                                <textarea name="body" class="form-control" cols="30" rows="10" required>{{$faker->text($maxNbChars = 140)}}</textarea>
                             </div>
                             @include('layouts.create.upload')
                             <div class="form-group">

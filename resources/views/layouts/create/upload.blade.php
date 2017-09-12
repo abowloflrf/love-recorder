@@ -26,11 +26,10 @@
                 '_token':'{{csrf_token()}}'
             },
             done: function (e, data) {
-                console.log(data);
                 if(data.result.message=="SUCCESS"){
                     var upload_img=data.result.saveKey;
-                    $('#upload-img-input').val('https://loverecorder-1251779005.image.myqcloud.com'+upload_img);
-                    $('.img-thumbnail').attr('src','https://loverecorder-1251779005.image.myqcloud.com'+upload_img+'/thumb');
+                    $('#upload-img-input').val('https://loverecorder-1251779005.picsh.myqcloud.com'+upload_img);
+                    $('.img-thumbnail').attr('src','https://loverecorder-1251779005.picsh.myqcloud.com'+upload_img+'/thumb');
                 }else{
                     alert("Upload failed!\n"+data.result.message);
                 }
