@@ -26,12 +26,12 @@
                 '_token':'{{csrf_token()}}'
             },
             done: function (e, data) {
-                if(data._response.textStatus=="success"){
-                    var upload_img=data.result.file;
-                    $('#upload-img-input').val('https://ruofeng-img.b0.upaiyun.com/'+upload_img);
-                    $('.img-thumbnail').attr('src','https://ruofeng-img.b0.upaiyun.com/'+upload_img+'!thumbnail'+'?'+Math.random());
+                if(data.result.message=="SUCCESS"){
+                    var upload_img=data.result.saveKey;
+                    $('#upload-img-input').val('https://loverecorder-1251779005.picsh.myqcloud.com'+upload_img);
+                    $('.img-thumbnail').attr('src','https://loverecorder-1251779005.picsh.myqcloud.com'+upload_img+'/thumb');
                 }else{
-                    alert("Upload failed!");
+                    alert("Upload failed!\n"+data.result.message);
                 }
 
             },
