@@ -31,7 +31,7 @@
                             <input type="hidden" name="cover_img" id="upload-img-input" required>
                             <div class="form-check">
                                 <label class="form-check-label">
-                                <input type="checkbox" class="form-check-input">
+                                <input name="private" type="checkbox" class="form-check-input">
                                 Private Record
                                 </label>
                             </div>

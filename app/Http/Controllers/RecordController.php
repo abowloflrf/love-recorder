@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Record;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 //引入腾讯云sdk
 use QCloud\Cos\Api;
@@ -25,7 +26,7 @@ class RecordController extends Controller
         }
     }
 
-    public function store()
+    public function store(Request $request)
     {
         $this->validate(request(),[
             'title'=>'required|max:30',
@@ -34,12 +35,19 @@ class RecordController extends Controller
             'date_and_time'=>'required'
         ]);
 
+        if($request->has('private')&&$request->private=='on'){
+            $isPrivate=1;
+        }else{
+            $isPrivate=0;
+        }
+
         Record::create([
             'title'=>request('title'),
             'body'=>request('body'),
             'cover_img'=>request('cover_img'),
             'user_id'=>auth()->user()->id,
-            'date_and_time'=>request('date_and_time')
+            'date_and_time'=>request('date_and_time'),
+            'private'=>$isPrivate
         ]);
 
         return redirect('/home');
@@ -149,13 +157,17 @@ class RecordController extends Controller
 
 //apis
     public function getRecord(Record $record){
+        if($record->private&&(!Auth::check()||auth()->user()->member==3)){
+            abort(404);
+        };
         $data=[
             "title"=>$record->title,
             "user_id"=>$record->user_id,
             "user_name"=>$record->user()->value('name'),
             "cover_img"=>$record->cover_img,
             "body"=>$record->body,
-            "date_and_time"=>$record->date_and_time
+            "date_and_time"=>$record->date_and_time,
+            "private"=>$record->private
         ];
         return $data;
     }
