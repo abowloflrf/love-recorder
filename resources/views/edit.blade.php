@@ -84,7 +84,17 @@
                         <div class="form-group">
                             <input name="date_and_time" class="datepicker-here form-control" data-timepicker="true" data-language='zh' data-position="top left" value="{{$record->date_and_time}}" reqired>
                         </div>
-                        <input type="hidden" name="cover_img" id="cover_img" value="{{$record->cover_img}}" reqired>                        
+                        <input type="hidden" name="cover_img" id="cover_img" value="{{$record->cover_img}}" reqired>
+                        <div class="form-check">
+                            <label class="form-check-label">
+                            @if($record->private)
+                                <input name="private" type="checkbox" class="form-check-input" checked>
+                            @else
+                                <input name="private" type="checkbox" class="form-check-input">
+                            @endif
+                            Private Record
+                            </label>
+                        </div>                      
                         <div class="form-group">
                             <button class="btn btn-primary" type="submit">Submit</button>
                         </div>
