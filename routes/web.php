@@ -26,6 +26,8 @@ Route::get('/records/{id}/edit','RecordController@editView')->name('edit');
 Route::post('/records/{id}/edit/change-img','RecordController@changeImg');
 Route::put('/records/{id}','RecordController@update');
 Route::delete('/records/{record}','RecordController@delete')->middleware('admin');
+//cos
+Route::get('/getToken','CosOperationController@index')->middleware('admin');
 
 //apis
 Route::get('/api/records/{record}','RecordController@getRecord');

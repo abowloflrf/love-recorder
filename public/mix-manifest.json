@@ -1,5 +1,6 @@
 {
     "/js/bundle.js": "/js/bundle.js",
     "/css/bundle.css": "/css/bundle.css",
-    "/css/timeline.css": "/css/timeline.css"
+    "/css/timeline.css": "/css/timeline.css",
+    "/js/nos.js": "/js/nos.js"
 }

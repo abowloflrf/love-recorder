@@ -11,6 +11,7 @@
   },
   "devDependencies": {
     "bootstrap": "^4.0.0-beta",
+    "cos-js-sdk-v4": "^1.1.5",
     "cross-env": "^5.0.5",
     "jquery": "^3.2.1",
     "laravel-mix": "^1.0",
