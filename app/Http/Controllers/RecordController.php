@@ -143,7 +143,7 @@ class RecordController extends Controller
             'region' => 'sh',
             'timeout' => 200
         );
-
+        $cosApi = new Api($config);
         //获取当前record所在目录
         $fileDir='/record/'.$record->id.'/';
         //列出当前目录所有文件

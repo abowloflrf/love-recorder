@@ -18,7 +18,7 @@ class CheckAdmin
     {
         if (!auth()->check()||auth()->user()->member>2) {
             // Redirect...
-            return redirect('/home');
+            return abort(404);
         }
 
         return $next($request);
