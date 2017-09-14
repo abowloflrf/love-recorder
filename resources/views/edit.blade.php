@@ -29,12 +29,8 @@
                             <label for="body">Content (140)</label>
                             <textarea name="body" class="form-control" cols="30" rows="10" reqired>{{$record->body}}</textarea>
                         </div>
-
-                        <script src="{{asset('js/jquery.ui.widget.js')}}"></script>
-                        <script src="{{asset('js/jquery.fileupload.js')}}"></script>
-                        <script src="{{asset('js/jquery.fileupload-process.js')}}"></script>
-                        <script src="{{asset('js/jquery.fileupload-validate.js')}}"></script>
-
+                        
+                        <script src="{{asset('js/cos-js-sdk-v4.js')}}"></script>
                         <div class="form-group">
                             <label class="custom-file">
                                 <input type="file" id="file-upload" name="file" class="custom-file-input" accept="image/*" multiple>
@@ -47,38 +43,61 @@
                         </div>
 
                         <script>
-                        $(function () {
-                            $('#file-upload').fileupload({
-                                url:'/records/{{$record->id}}/edit/change-img',
-                                type:'POST',
-                                acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
-                                maxFileSize: 10000000,
-                                dataType: 'json',
-                                formData:{
-                                    '_token':'{{csrf_token()}}'
-                                },
-                                done: function (e, data) {
-                                    if(data.result.message=="SUCCESS"){
-                                        var upload_img=data.result.saveKey;
-                                        $('#cover_img').val('https://loverecorder-1251779005.picsh.myqcloud.com'+upload_img);
-                                        $('.img-thumbnail').attr('src','https://loverecorder-1251779005.picsh.myqcloud.com'+upload_img+'/thumb');
-                                    }else{
-                                        alert("Upload failed!\n"+data.result.message);
+                        $(document).ready(function() {
+                            $('#file-upload').on('change', function(e) {
+                                //新建cos对象
+                                var cos = new CosCloud({
+                                    appid: {{env('COS_APPID')}},// APPID 必填参数
+                                    bucket: "{{env('COS_BUCKET')}}",//bucketName 必填参数
+                                    region: 'sh',//地域信息 必填参数 华南地区填gz 华东填sh 华北填tj
+                                    getAppSign: function (callback) {
+                                        //获取多次签名 必填参数
+                                        $.ajax({
+                                            url:'/getToken'
+                                        }).done(function (data) {
+                                            callback(data.sign_a);
+                                        });        
+                                    },
+                                    getAppSignOnce: function (callback) {
+                                        //单次签名，必填参数，参考上面的注释即可
+                                        //TODO:这里修改当前record图片的单词签名不可用，需要将next_id改为当前id
+                                        $.ajax({
+                                            url:'/getToken',
+                                            data:{file: e.target.files[0].name}
+                                        }).done(function(data){
+                                            callback(data.sign_b);
+                                        });
                                     }
+                                }); 
+                                //开始上传文件
+                                
+                                var successCallBack = function (result) {
+                                    var path=result.data.resource_path;
+                                    var upload_img=path.substring(24);
+                                    $('#cover_img').val('https://loverecorder-1251779005.picsh.myqcloud.com'+upload_img);
+                                    $('.img-thumbnail').attr('src','https://loverecorder-1251779005.picsh.myqcloud.com'+upload_img+'/thumb');
+                                };
 
-                                },
-                                progressall: function (e, data) {
-                                    var progress = parseInt(data.loaded / data.total * 100, 10);
+                                var errorCallBack = function (result) {
+                                    alert(result.message);
+                                };
+
+                                var progressCallBack = function(curr){
+                                    var progress = parseInt(curr * 100, 10);
                                     $('.progress-bar').css(
                                         'width',
                                         progress + '%'
                                     );
-                                },
-                                processfail: function (e, data) {
-                                    alert(data.files[data.index].name + "\n" + data.files[data.index].error);
-                                }
+                                };
+                                var file = e.target.files[0];
+                                var id={{$record->id}};
+                                var filepath="/record/"+id+"/"+file.name;
+                                cos.uploadFile(successCallBack, errorCallBack, progressCallBack, "{{env('COS_BUCKET')}}", filepath, file, 1);
+                                   
+                                
                             });
                         });
+                        
                         </script>
 
                         <div class="form-group">

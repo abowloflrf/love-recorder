@@ -1,7 +1,3 @@
-{{--  <script src="{{asset('js/jquery.ui.widget.js')}}"></script>
-<script src="{{asset('js/jquery.fileupload.js')}}"></script>
-<script src="{{asset('js/jquery.fileupload-process.js')}}"></script>
-<script src="{{asset('js/jquery.fileupload-validate.js')}}"></script>  --}}
 <script src="{{asset('js/cos-js-sdk-v4.js')}}"></script>
 
 <div class="form-group">
@@ -42,7 +38,6 @@
                 }
             }); 
             //开始上传文件
-            //var myFolder = file_key.substring(0,file_key.length - e.target.files[0].name.length);//需要操作的目录
             var successCallBack = function (result) {
                 var path=result.data.resource_path;
                 var upload_img=path.substring(24);
@@ -76,38 +71,3 @@
         });
     });
 </script>
-
-{{--  <script>
-    $(function () {
-        $('#file-upload').fileupload({
-            url:'/records/create/upload-img',
-            type:'POST',
-            acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
-            maxFileSize: 10000000,
-            dataType: 'json',
-            formData:{
-                '_token':'{{csrf_token()}}'
-            },
-            done: function (e, data) {
-                if(data.result.message=="SUCCESS"){
-                    var upload_img=data.result.saveKey;
-                    $('#upload-img-input').val('https://loverecorder-1251779005.picsh.myqcloud.com'+upload_img);
-                    $('.img-thumbnail').attr('src','https://loverecorder-1251779005.picsh.myqcloud.com'+upload_img+'/thumb');
-                }else{
-                    alert("Upload failed!\n"+data.result.message);
-                }
-
-            },
-            progressall: function (e, data) {
-                var progress = parseInt(data.loaded / data.total * 100, 10);
-                $('.progress-bar').css(
-                    'width',
-                    progress + '%'
-                );
-            },
-            processfail: function (e, data) {
-                alert(data.files[data.index].name + "\n" + data.files[data.index].error);
-            }
-        });
-    });
-</script>  --}}

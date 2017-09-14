@@ -5,16 +5,33 @@ namespace App\Http\Controllers;
 use App\Record;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Auth;
 
 //引入腾讯云sdk
 use QCloud\Cos\Api;
+use QCloud\Cos\Auth;
 //引入Faker
 use Faker\Factory;
 
 class RecordController extends Controller
 {
-    public function create()
+    var $config;
+    var $cosApi;
+    //因为涉及到record的操作大多需要调用cos来操作其中的图片，因此创建一个构造函数，构造一个cosApi对象
+    public function __construct()
+    {
+        $this->config = array(
+            'app_id' => env('COS_APPID'),
+            'secret_id' => env('COS_SECRETID'),
+            'secret_key' => env('COS_SECRETKEY'),
+            'region' => 'sh',
+            'timeout' => 60
+        );
+        
+        $this->cosApi = new Api($this->config);
+    }
+
+    //返回create页视图
+    public function createView()
     {
         if (!auth()->check()) {
             return view('auth.not-login');
@@ -26,6 +43,7 @@ class RecordController extends Controller
         }
     }
 
+    //将新建的record信息储存到数据库
     public function store(Request $request)
     {
         $this->validate(request(),[
@@ -53,28 +71,7 @@ class RecordController extends Controller
         return redirect('/home');
     }
 
-    public function imgUpload(Request $request)
-    {
-        //TODO: 验证上传文件类型，大小，否则返回错误
-        $config = array(
-            'app_id' => env('COS_APPID'),
-            'secret_id' => env('COS_SECRETID'),
-            'secret_key' => env('COS_SECRETKEY'),
-            'region' => 'sh',
-            'timeout' => 200
-        );
-        $cosApi = new Api($config);
-
-        $filePath = $request->file('file')->getPathname();
-        $fileName = $request->file('file')->getClientOriginalName();
-        $nextID=DB::select("show table status like 'records'")[0]->Auto_increment;
-        $saveKey='/record/'.$nextID.'/'.$fileName;
-        // 上传文件
-        $ret = $cosApi->upload(env('COS_BUCKET'), $filePath, $saveKey);
-        $ret['saveKey']=$saveKey;      
-        return $ret;
-    }
-
+    //返回修改record视图
     public function editView($id)
     {
         if (!auth()->check()) {
@@ -87,27 +84,7 @@ class RecordController extends Controller
         }
     }
 
-    public function changeImg(Request $request)
-    {
-        //TODO: 验证上传文件类型，大小，否则返回错误
-        $config = array(
-            'app_id' => env('COS_APPID'),
-            'secret_id' => env('COS_SECRETID'),
-            'secret_key' => env('COS_SECRETKEY'),
-            'region' => 'sh',
-            'timeout' => 200
-        );
-        $cosApi = new Api($config);
-
-        $filePath = $request->file('file')->getPathname();
-        $fileName = $request->file('file')->getClientOriginalName();
-        $saveKey='/record/'.$request->id.'/'.$fileName;
-        // 上传文件
-        $ret = $cosApi->upload(env('COS_BUCKET'), $filePath, $saveKey);
-        $ret['saveKey']=$saveKey;      
-        return $ret;
-    }
-
+    //更新record数据到数据库
     public function update(Request $request)
     {
         $this->validate(request(),[
@@ -134,26 +111,19 @@ class RecordController extends Controller
         return redirect('/home');
     }
 
+    //删除record信息且同时删除腾讯云中相应的图片
     public function delete(Record $record)
     {   
-        $config = array(
-            'app_id' => env('COS_APPID'),
-            'secret_id' => env('COS_SECRETID'),
-            'secret_key' => env('COS_SECRETKEY'),
-            'region' => 'sh',
-            'timeout' => 200
-        );
-        $cosApi = new Api($config);
         //获取当前record所在目录
         $fileDir='/record/'.$record->id.'/';
         //列出当前目录所有文件
-        $result = $cosApi->listFolder(env('COS_BUCKET'), $fileDir,null,null,'eListFileOnly');
+        $result = $this->cosApi->listFolder(env('COS_BUCKET'), $fileDir,null,null,'eListFileOnly');
         //逐个删除目录中的文件
         $files=$result['data']['infos'];
         foreach($files as $file)
         {
             $fileKey=substr($file['access_url'],48);
-            $delResult = $cosApi->delFile(env('COS_BUCKET'), $fileKey);
+            $delResult = $this->cosApi->delFile(env('COS_BUCKET'), $fileKey);
             //TODO:删除报错时提供相应的相应
             // if($delResult['code']!=0){
             //     dd($delResult['message']);
@@ -166,7 +136,7 @@ class RecordController extends Controller
 //apis
     public function getRecord(Record $record){
         //TODO:改进为不论提供什么参数都有json返回，而不是错误则返回404页面
-        if($record->private&&(!Auth::check()||auth()->user()->member==3)){
+        if($record->private&&(!auth()->check()||auth()->user()->member==3)){
             abort(404);
         };
         $data=[
@@ -178,6 +148,32 @@ class RecordController extends Controller
             "date_and_time"=>$record->date_and_time,
             "private"=>$record->private
         ];
-        return $data;
+        return response()->json($data);
+    }
+
+    //获取上传密钥
+    public function getSign(Request $request)
+    {
+        //获得即将要创建的record的id即数据库中将要插入的下一条记录的id
+        $nextID=DB::select("show table status like 'records'")[0]->Auto_increment;
+        //只获取id
+        if($request->has('onlyid')&&$request->onlyid==1){
+            return response()->json(['next_id'=>$nextID]);
+        }
+
+        //使用cos sdk生成密钥
+        $auth = new Auth($appId = $this->config['app_id'], $secretId =$this->config['secret_id'], $secretKey = $this->config['secret_key'].'');
+        $expiration = time() + 3600;
+        $bucket = env('COS_BUCKET');
+        $filepath = '/record/'.$nextID.'/'.$request->file;
+        $sign_a = $auth->createReusableSignature($expiration, $bucket, null);//多次签名，文件路径参数可为空
+        //TODO:这里获取单次签名的filepath最好由参数传过来
+        $sign_b = $auth->createNonreusableSignature($bucket, $filepath);//单次签名，文件路径必须
+        //以json形式返回
+        return response()->json([
+            'sign_a'=>$sign_a,
+            'sign_b'=>$sign_b,
+            'next_key'=>$nextID
+        ]);
     }
 }
