@@ -12,7 +12,7 @@
                 <form class="float-right" action="/records/{{$record->id}}" method="post" onsubmit="return confirm('确认要删除?');">
                     {{csrf_field()}}
                     {{method_field('DELETE')}}
-                    <button class="btn btn-danger" type="submit">Delete this record</button>
+                    <button class="btn btn-danger" type="submit">删除</button>
                 </form>
                 
             </div>
@@ -22,11 +22,11 @@
                         {{csrf_field()}}
                         <input type="hidden" name="record_id" value="{{$record->id}}">   
                         <div class="form-group">
-                            <label for="title">Title (30)</label>
+                            <label for="title">标题 (30字)</label>
                             <input class="form-control" type="text" name="title" value="{{$record->title}}" reqired autofocus>
                         </div>
                         <div class="form-group">
-                            <label for="body">Content (140)</label>
+                            <label for="body">内容 (140字)</label>
                             <textarea name="body" class="form-control" cols="30" rows="10" reqired>{{$record->body}}</textarea>
                         </div>
                         
@@ -111,11 +111,11 @@
                             @else
                                 <input name="private" type="checkbox" class="form-check-input">
                             @endif
-                            Private Record
+                            私密记录
                             </label>
                         </div>                      
                         <div class="form-group">
-                            <button class="btn btn-primary" type="submit">Submit</button>
+                            <button class="btn btn-primary" type="submit">发布</button>
                         </div>
 
                         <div class="form-group">

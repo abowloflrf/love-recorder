@@ -8,7 +8,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <p id="detail-modal-meta" class="text-muted lead">Recorded by <span id="detail-modal-author">User</span> on <span class="font-italic"id="detail-modal-time">1 Jan 2017</span></p>            
+        <p id="detail-modal-meta" class="text-muted lead"><span id="detail-modal-author">User</span> 记录于 <span class="font-italic"id="detail-modal-time">1 Jan 2017</span></p>            
         <img id="detail-modal-cover" src="" class="img-fluid">
         <div id="detail-modal-body" class="container p-3">
             Loading...
@@ -16,9 +16,9 @@
       </div>
       <div class="modal-footer">
         @if(Auth::check()&&Auth::user()->member<3)
-          <a href="" id="edit-button" class="btn btn-secondary">Edit</a>
+          <a href="" id="edit-button" class="btn btn-secondary">编辑</a>
         @endif
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
       </div>
     </div>
   </div>

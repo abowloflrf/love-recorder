@@ -14,11 +14,11 @@
                         <form action="/records" method="post">
                             {{csrf_field()}}
                             <div class="form-group">
-                                <label for="title">Title (30)</label>
+                                <label for="title">标题 (30字)</label>
                                 <input class="form-control" type="text" name="title" value="{{$faker->text($maxNbChars = 30)}}" required autofocus>
                             </div>
                             <div class="form-group">
-                                <label for="body">Content (140)</label>
+                                <label for="body">内容 (140字)</label>
                                 <textarea name="body" class="form-control" cols="30" rows="10" required>{{$faker->text($maxNbChars = 140)}}</textarea>
                             </div>
 
@@ -106,11 +106,11 @@
                             <div class="form-check">
                                 <label class="form-check-label">
                                 <input name="private" type="checkbox" class="form-check-input">
-                                Private Record
+                                私密记录
                                 </label>
                             </div>
                             <div class="form-group">
-                                <button class="btn btn-primary" type="submit">Submit</button>
+                                <button class="btn btn-primary" type="submit">发布</button>
                             </div>
 
                             <div class="form-group">

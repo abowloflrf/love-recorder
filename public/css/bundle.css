@@ -3668,6 +3668,10 @@ tbody.collapse.show {
   content: "Choose file...";
 }
 
+.custom-file-control:lang(zh):empty::after {
+  content: "\9009\62E9\6587\4EF6...";
+}
+
 .custom-file-control::before {
   position: absolute;
   top: 0;
@@ -3684,6 +3688,10 @@ tbody.collapse.show {
 
 .custom-file-control:lang(en)::before {
   content: "Browse";
+}
+
+.custom-file-control:lang(zh)::before {
+  content: "\6D4F\89C8";
 }
 
 .nav {
