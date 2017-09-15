@@ -1,18 +1,20 @@
 $font-family-sans-serif: "Open Sans","Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
 $font-family-monospace:  "Fira Code","mononoki", Consolas, "Liberation Mono", "Courier New", monospace !default;
 
+$custom-file-text: (
+    placeholder: (
+      en: "Choose file...",
+      zh: "选择文件..."
+    ),
+    button-label: (
+      en: "Browse",
+      zh: "浏览"
+    )
+  ) !default;
 
 
 
-//上传文件提示词
-// $custom-file-text: (
-//     placeholder: (
-//       en: "Choose file..."
-//     ),
-//     button-label: (
-//       en: "Browse"
-//     )
-//   );
+
 // // Body
 // $body-bg: #f5f8fa;
 

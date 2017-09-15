@@ -5,13 +5,13 @@
     <div class="row">
         <div class="col-md-8 mx-auto">
             <div class="card">
-                <div class="card-header">Register</div>
+                <div class="card-header">注册</div>
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}">
                         {{ csrf_field() }}
 
                         <div class="form-group row{{ $errors->has('name') ? ' has-error' : '' }}">
-                            <label for="name" class="col-md-4 col-form-label text-right">Name</label>
+                            <label for="name" class="col-md-4 col-form-label text-right">昵称</label>
 
                             <div class="col-md-6">
                                 <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" aria-describedby="nameHelpBlock" required autofocus>
@@ -25,7 +25,7 @@
                         </div>
 
                         <div class="form-group row{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 col-form-label text-right">E-Mail Address</label>
+                            <label for="email" class="col-md-4 col-form-label text-right">电子邮件</label>
 
                             <div class="col-md-6">
                                 <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" aria-describedby="emailHelpBlock" required>
@@ -39,7 +39,7 @@
                         </div>
 
                         <div class="form-group row{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label for="password" class="col-md-4 col-form-label text-right">Password</label>
+                            <label for="password" class="col-md-4 col-form-label text-right">密码</label>
 
                             <div class="col-md-6">
                                 <input id="password" type="password" class="form-control" name="password" aria-describedby="passwordHelpBlock" required>
@@ -53,7 +53,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-right">Confirm Password</label>
+                            <label for="password-confirm" class="col-md-4 col-form-label text-right">确认密码</label>
 
                             <div class="col-md-6">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
@@ -61,7 +61,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="secret-code" class="col-md-4 col-form-label text-right">Secret Code</label>
+                            <label for="secret-code" class="col-md-4 col-form-label text-right">神秘代码</label>
 
                             <div class="col-md-6">
                                 <input id="secret-code" type="text" class="form-control" name="secret-code" aria-describedby="secret-codeHelpBlock">
@@ -71,7 +71,7 @@
                         <div class="form-group row">
                             <div class="col-md-8 ml-md-auto">
                                 <button type="submit" class="btn btn-primary">
-                                    Register
+                                    注册
                                 </button>
                             </div>
                         </div>

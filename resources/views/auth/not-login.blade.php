@@ -5,10 +5,10 @@
             <div class="col-md-8 mx-auto">
                 <div class="card">
                     <div class="card-header">
-                        Something wrong...
+                        出了一些问题。。。
                     </div>
                     <div class="card-body">
-                        In order to do this, Click <a href="/login">here</a> to Login.
+                        <a href="/login">登陆</a>来进行接下来的操作。
                     </div>
                 </div>
             </div>

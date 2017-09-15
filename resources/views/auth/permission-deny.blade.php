@@ -5,10 +5,10 @@
             <div class="col-md-8 mx-auto">
                 <div class="card">
                     <div class="card-header">
-                        Something wrong...
+                        出了一些问题。。。
                     </div>
                     <div class="card-body">
-                        You don't have permission to do this.
+                        权限不足。
                     </div>
                 </div>
             </div>
