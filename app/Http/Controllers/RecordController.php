@@ -37,7 +37,7 @@ class RecordController extends Controller
             return view('auth.not-login');
         }elseif (auth()->user()->member<3){
             $faker = Factory::create();
-            return view('layouts.create',compact('faker'));
+            return view('create',compact('faker'));
         }else{
             return view('auth.permission-deny');
         }
@@ -99,15 +99,15 @@ class RecordController extends Controller
         }else{
             $isPrivate=0;
         }
-        
-        $record=Record::find(request('record_id'));
-        $record->title=request('title');
-        $record->body=request('body');
-        $record->date_and_time=request('date_and_time');
-        $record->cover_img=request('cover_img');
-        $record->private=$isPrivate;
-        $record->save();
 
+        DB::table('records')->where('id', $request->record_id)->update([
+            'title'=>$request->title,
+            'body'=>$request->body,
+            'date_and_time'=>$request->date_and_time,
+            'cover_img'=>$request->cover_img,
+            'private'=>$isPrivate
+            ]);
+            
         return redirect('/home');
     }
 
