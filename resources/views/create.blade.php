@@ -102,13 +102,17 @@
                                     $('.datepicker-here').datepicker().data('datepicker').selectDate(new Date());
                                 </script>
                             </div>
+                            
                             <input type="hidden" name="cover_img" id="upload-img-input" required>
+
                             <div class="form-check">
-                                <label class="form-check-label">
-                                <input name="private" type="checkbox" class="form-check-input">
-                                私密记录
+                                <label class="custom-control custom-checkbox">
+                                    <input type="checkbox" name="private" class="custom-control-input">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">私密记录</span>
                                 </label>
                             </div>
+                            
                             <div class="form-group">
                                 <button class="btn btn-primary" type="submit">发布</button>
                             </div>

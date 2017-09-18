@@ -105,13 +105,14 @@
                         </div>
                         <input type="hidden" name="cover_img" id="cover_img" value="{{$record->cover_img}}" reqired>
                         <div class="form-check">
-                            <label class="form-check-label">
+                            <label class="custom-control custom-checkbox">
                             @if($record->private)
-                                <input name="private" type="checkbox" class="form-check-input" checked>
+                                <input type="checkbox" name="private" class="custom-control-input" checked>
                             @else
-                                <input name="private" type="checkbox" class="form-check-input">
+                                <input type="checkbox" name="private" class="custom-control-input">
                             @endif
-                            私密记录
+                                <span class="custom-control-indicator"></span>
+                                <span class="custom-control-description">私密记录</span>
                             </label>
                         </div>                      
                         <div class="form-group">
