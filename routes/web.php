@@ -24,6 +24,8 @@ Route::post('/records','RecordController@store');
 Route::get('/records/{id}/edit','RecordController@editView')->name('edit');
 Route::put('/records/{id}','RecordController@update');
 Route::delete('/records/{record}','RecordController@delete')->middleware('admin');
+//love
+Route::post('/records/{record}/love-up','RecordController@loveUp');
 //apis
 Route::get('/api/records/{record}','RecordController@getRecord');
 Route::get('/getToken','RecordController@getSign')->middleware('admin');

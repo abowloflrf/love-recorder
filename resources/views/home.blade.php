@@ -58,6 +58,7 @@
 
 @include('layouts.detail-modal')
 <script src="{{asset('js/detail-modal-loader.js')}}"></script>
+<script src="{{asset('js/love.js')}}"></script>
 @endsection
 
 

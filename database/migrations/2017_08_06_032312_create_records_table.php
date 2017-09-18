@@ -19,7 +19,7 @@ class CreateRecordsTable extends Migration
             $table->text('title');
             $table->text('body');
             $table->string('cover_img');
-            $table->timestamp('date_and_time');
+            $table->dateTime('date_and_time');
             $table->timestamps();
         });
     }

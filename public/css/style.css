@@ -12,14 +12,16 @@ body {
     min-height: 100%;
 }
 
-.love-time h1{
+.love-time h1 {
     font-size: 72px;
     font-family: 'Lobster', cursive;
 }
-.love-time h1:nth-child(3){
+
+.love-time h1:nth-child(3) {
     font-size: 48px;
 }
-.love-time span{
+
+.love-time span {
     color: #6C567B;
     font-size: 72px;
 }
@@ -33,52 +35,90 @@ body {
     background-color: #ffffff;
     border-top: 1px solid #d3e0e9;
 }
+
 .container .text-muted {
     margin: 20px 0;
 }
-.navbar{
+
+.navbar {
     box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
 }
 
-.timeline .card-body{
+.timeline-card-cover {
+    width: 100%;
+    border-radius: 4px 4px 0 0;
+    background-color: #eee;
+}
+
+.timeline .card-body {
     padding-bottom: 0.75rem;
 }
-.timeline .card-text{
+
+.timeline .card-text {
     margin-bottom: 0;
 }
 
-.uk-badge{
-    font-family:"Calibri Light","Segoe UI","Microsoft YaHei UI Light",sans-serif;
+.uk-badge {
+    font-family: "Calibri Light", "Segoe UI", "Microsoft YaHei UI Light", sans-serif;
 }
 
-.love-time h1:nth-child(2){
+.love-time h1:nth-child(2) {
     font-size: 48px;
 }
-@media screen and (max-width:576px){
-    .love-time h1{
+
+i.love-btn {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+i.love-btn-red {
+    color: rgba(251, 80, 59, 0.8);
+}
+
+i.love-btn-white {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.love-count {
+    position: absolute;
+    top: 20px;
+    left: 50px;
+    color: #303e49;
+    font-size: 18px;
+    text-shadow: 0px 0px 2px rgba(255, 255, 255, 0.85);
+}
+
+@media screen and (max-width:576px) {
+    .love-time h1 {
         font-size: 32px;
     }
-    .love-time span{
+    .love-time span {
         font-size: 32px;
     }
-    .love-time h1:nth-child(2){
+    .love-time h1:nth-child(2) {
         font-size: 20px;
     }
 }
 
-img#detail-modal-cover{
-    width:100%;
+img#detail-modal-cover {
+    width: 100%;
     padding: 4px;
     border: 1px solid #ddd;
 }
-#detail-modal-meta{
+
+#detail-modal-meta {
     font-size: 1rem;
 }
-#detail-modal-body{
+
+#detail-modal-body {
     font-size: 1.5em;
 }
-@media screen and (max-width:576px){
-    #detail-modal-body{
+
+@media screen and (max-width:576px) {
+    #detail-modal-body {
         font-size: 1em;
     }
 }

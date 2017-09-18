@@ -13,6 +13,8 @@
     <!-- Styles -->
     <link href="{{ asset('css/bundle.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
+    {{--  Icons  --}}
+    <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <!-- Scripts -->
     <script src="{{ asset('js/bundle.js') }}"></script>
 

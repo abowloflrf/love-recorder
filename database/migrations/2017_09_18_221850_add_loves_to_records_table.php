@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddPrivateToRecordsTable extends Migration
+class AddLovesToRecordsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,7 @@ class AddPrivateToRecordsTable extends Migration
     public function up()
     {
         Schema::table('records', function (Blueprint $table) {
-            $table->boolean('private')->default(FALSE);
+            $table->integer('loves')->default(0);
         });
     }
 
@@ -26,7 +26,7 @@ class AddPrivateToRecordsTable extends Migration
     public function down()
     {
         Schema::table('records', function (Blueprint $table) {
-            $table->dropColumn('private');
+            $table->dropColumn('loves');
         });
     }
 }
