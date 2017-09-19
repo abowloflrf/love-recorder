@@ -33,9 +33,13 @@
                     </button>
 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item"><a class="nav-link" href="{{ route('board') }}">留言板</a></li>
+                    </ul>
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
+                        
                         @if (Auth::guest())
                             <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">登陆</a></li>
                             <li class="nav-item"><a class="nav-link" href="{{ route('register') }}">注册</a></li>

@@ -129,12 +129,13 @@ class RecordController extends Controller
             {
             $fileKey = substr($file['access_url'], 48);
             $delResult = $this->cosApi->delFile(env('COS_BUCKET'), $fileKey);
-            //TODO:删除报错时提供相应的相应
+            //TODO:删除报错时提供错误信息
             // if($delResult['code']!=0){
             //     dd($delResult['message']);
             // }
 
         }
+        //删除数据库中的记录
         $record->delete();
         return redirect('/home');
     }
@@ -150,8 +151,10 @@ class RecordController extends Controller
 
 
 //apis
+    //获取指定的记录
     public function getRecord(Record $record)
     {
+        dd($record);
         //TODO:改进为不论提供什么参数都有json返回，而不是错误则返回404页面
         if ($record->private && (!auth()->check() || auth()->user()->member == 3)) {
             abort(404);
@@ -163,7 +166,8 @@ class RecordController extends Controller
             "cover_img" => $record->cover_img,
             "body" => $record->body,
             "date_and_time" => $record->date_and_time,
-            "private" => $record->private
+            "private" => $record->private,
+            "loves"=>$record->loves
         ];
         return response()->json($data);
     }

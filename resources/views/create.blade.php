@@ -15,11 +15,11 @@
                             {{csrf_field()}}
                             <div class="form-group">
                                 <label for="title">标题 (30字)</label>
-                                <input class="form-control" type="text" name="title" value="{{$faker->text($maxNbChars = 30)}}" required autofocus>
+                                <input class="form-control" type="text" name="title" value="{{$faker->text($maxNbChars = 30)}}" maxlength="30" required autofocus>
                             </div>
                             <div class="form-group">
                                 <label for="body">内容 (140字)</label>
-                                <textarea name="body" class="form-control" cols="30" rows="10" required>{{$faker->text($maxNbChars = 140)}}</textarea>
+                                <textarea name="body" class="form-control" cols="30" rows="10" maxlength="140" required>{{$faker->text($maxNbChars = 140)}}</textarea>
                             </div>
 
                             {{--  上传图片  --}}

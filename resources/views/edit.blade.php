@@ -23,11 +23,11 @@
                         <input type="hidden" name="record_id" value="{{$record->id}}">   
                         <div class="form-group">
                             <label for="title">标题 (30字)</label>
-                            <input class="form-control" type="text" name="title" value="{{$record->title}}" reqired autofocus>
+                            <input class="form-control" type="text" name="title" value="{{$record->title}}" maxlength="30" required autofocus>
                         </div>
                         <div class="form-group">
                             <label for="body">内容 (140字)</label>
-                            <textarea name="body" class="form-control" cols="30" rows="10" reqired>{{$record->body}}</textarea>
+                            <textarea name="body" class="form-control" cols="30" rows="10" maxlength="140" required>{{$record->body}}</textarea>
                         </div>
                         
                         <script src="{{asset('js/cos-js-sdk-v4.js')}}"></script>
@@ -101,9 +101,9 @@
                         </script>
 
                         <div class="form-group">
-                            <input name="date_and_time" class="datepicker-here form-control" data-timepicker="true" data-language='zh' data-position="top left" value="{{$record->date_and_time}}" reqired>
+                            <input name="date_and_time" class="datepicker-here form-control" data-timepicker="true" data-language='zh' data-position="top left" value="{{$record->date_and_time}}" required>
                         </div>
-                        <input type="hidden" name="cover_img" id="cover_img" value="{{$record->cover_img}}" reqired>
+                        <input type="hidden" name="cover_img" id="cover_img" value="{{$record->cover_img}}" required>
                         <div class="form-check">
                             <label class="custom-control custom-checkbox">
                             @if($record->private)

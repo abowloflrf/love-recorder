@@ -26,6 +26,9 @@ Route::put('/records/{id}','RecordController@update');
 Route::delete('/records/{record}','RecordController@delete')->middleware('admin');
 //love
 Route::post('/records/{record}/love-up','RecordController@loveUp');
+//msgboard
+Route::get('/board','CommentController@index')->name('board');
+Route::post('/board','CommentController@store');
 //apis
 Route::get('/api/records/{record}','RecordController@getRecord');
 Route::get('/getToken','RecordController@getSign')->middleware('admin');
