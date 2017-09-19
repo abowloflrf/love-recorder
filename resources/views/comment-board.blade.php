@@ -23,8 +23,12 @@
                         </div>
                         <div class="form-group">
                             <div class="input-group">
-                                <span class="input-group-addon" style="padding:0;width:80px;"><img src="{{asset('img/30-100.png')}}" alt="" style="width:80px;height:30px;border-radius:0.25rem 0 0 0.25rem;"></img></span>
-                                <input type="text" class="form-control" placeholder="验证码" required>
+                                <span class="input-group-addon" style="padding:0;width:80px;"><img src="{{Captcha::src('flat')}}" alt="captcha" style="width:80px;height:30px;margin:0 4px" onclick="this.src='/captcha/flat?'+Math.random()"></img></span>
+                                <input type="text" name="captcha" maxlength="4" class="form-control 
+                                    @if ($errors->has('captcha'))
+                                        is-invalid
+                                    @endif" 
+                                placeholder="验证码" required>
                             </div>
                         </div>
                         <div class="">
@@ -33,7 +37,9 @@
                     </div>
                 </div>
             </form>
-               
+
+            <hr>
+
             @foreach($comments as $comment)
                 @include('layouts.single-comment')
             @endforeach

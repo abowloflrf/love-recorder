@@ -154,7 +154,6 @@ class RecordController extends Controller
     //获取指定的记录
     public function getRecord(Record $record)
     {
-        dd($record);
         //TODO:改进为不论提供什么参数都有json返回，而不是错误则返回404页面
         if ($record->private && (!auth()->check() || auth()->user()->member == 3)) {
             abort(404);

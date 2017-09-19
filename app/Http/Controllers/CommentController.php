@@ -25,11 +25,11 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
-
         $this->validate(request(), [
             'comment' => 'required',
             'display_name' => 'required',
-            'email' => 'required'
+            'email' => 'required',
+            'captcha' => 'required|captcha'
         ]);
 
         Comment::create([
