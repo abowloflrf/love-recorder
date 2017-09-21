@@ -45,6 +45,12 @@ class CommentController extends Controller
 
     public function reply(Request $request)
     {
+        //若已经被回复则直接跳转
+        if(DB::table('comments')->where('id', $request->reply_to_id)->value('is_replied'))
+        {
+            return redirect('/board');
+        }
+        //回复
         $this->validate(request(), [
             'reply_to_id'=>'required'
         ]);

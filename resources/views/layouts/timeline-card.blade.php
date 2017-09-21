@@ -12,10 +12,10 @@
     <div class="cd-timeline-content" id="record-{{$record->id}}">
         <img class="timeline-card-cover" src="{{$record->cover_img.'/timeline'}}">
         
-        @if ($_COOKIE['love-'.$record->id] == '1')
-            <i class="fa fa-heart love-btn love-btn-red" aria-hidden="true"></i>
-        @else
+        @if (!isset($_COOKIE['love-'.$record->id]))
             <i class="fa fa-heart love-btn love-btn-white" aria-hidden="true"></i>
+        @elseif($_COOKIE['love-'.$record->id] == '1')
+            <i class="fa fa-heart love-btn love-btn-red" aria-hidden="true"></i>
         @endif
         <span class="love-count love-count-0">{{$record->loves}}</span>
         
