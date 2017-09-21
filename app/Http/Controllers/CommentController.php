@@ -2,7 +2,9 @@
 namespace App\Http\Controllers;
 
 use App\Comment;
+use App\Reply;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CommentController extends Controller
 {
@@ -36,6 +38,25 @@ class CommentController extends Controller
             'comment'=>$request->comment,
             'display_name'=>$request->display_name,
             'email'=>$request->email
+        ]);
+
+        return redirect('/board');
+    }
+
+    public function reply(Request $request)
+    {
+        $this->validate(request(), [
+            'reply_to_id'=>'required'
+        ]);
+
+        Reply::create([
+            'reply_to_id'=>$request->reply_to_id,
+            'reply_user_id'=>auth()->user()->id,
+            'reply_body'=>$request->reply_body
+        ]);
+
+        DB::table('comments')->where('id', $request->reply_to_id)->update([
+            'is_replied'=>TRUE
         ]);
 
         return redirect('/board');

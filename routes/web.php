@@ -29,6 +29,7 @@ Route::post('/records/{record}/love-up','RecordController@loveUp');
 //msgboard
 Route::get('/board','CommentController@index')->name('board');
 Route::post('/board','CommentController@store');
+Route::post('/board/reply','CommentController@reply');
 //apis
 Route::get('/api/records/{record}','RecordController@getRecord');
 Route::get('/getToken','RecordController@getSign')->middleware('admin');

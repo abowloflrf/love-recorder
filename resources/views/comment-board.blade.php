@@ -5,7 +5,7 @@
         <div class="col-lg-8 mx-auto">
             <h4>想说点什么吗？</h4>
             <form method="POST" action="/board">
-                {{ csrf_field() }}
+                {{csrf_field()}}
                 <div class="form-group form-row">
                     <div class="form-group col-sm-8">
                         <textarea class="form-control" name="comment" rows="9" required></textarea>
@@ -43,7 +43,47 @@
             @foreach($comments as $comment)
                 @include('layouts.single-comment')
             @endforeach
-            
+        
+            @if(Auth::guest())
+            @elseif(auth()->user()->member<3)
+                <div class="modal fade" id="replyModal" tabindex="-1" role="dialog" aria-labelledby="replyLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="replyLabel">回复评论</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form method="POST" action="/board/reply" id="reply-form">
+                                {{csrf_field()}}
+                                <input type="text" name="reply_to_id" class="form-control" id="recipient-name" readonly hidden>
+                                <div class="form-group">
+                                    <label for="reply_body" class="form-control-label">回复内容：</label>
+                                    <textarea name="reply_body" class="form-control" required></textarea>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                            <button type="button" class="btn btn-primary" onclick="document.getElementById('reply-form').submit();">回复</button>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+                <script>
+                    $('#replyModal').on('show.bs.modal', function (event) {
+                    var button = $(event.relatedTarget) // Button that triggered the modal
+                    var recipient = button.data('commentid') // Extract info from data-* attributes
+                    // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+                    // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+                    var modal = $(this)
+                    modal.find('.modal-title').text('回复给id为'+recipient+'的留言')
+                    modal.find('.modal-body input#recipient-name').val(recipient)
+                    })
+                </script>
+            @endif
 
         </div>
     </div>    
