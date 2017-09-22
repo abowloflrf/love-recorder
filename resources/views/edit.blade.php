@@ -53,19 +53,18 @@
                                     getAppSign: function (callback) {
                                         //获取多次签名 必填参数
                                         $.ajax({
-                                            url:'/getToken'
+                                            url:'/reusableToken'
                                         }).done(function (data) {
-                                            callback(data.sign_a);
+                                            callback(data.sign);
                                         });        
                                     },
                                     getAppSignOnce: function (callback) {
                                         //单次签名，必填参数，参考上面的注释即可
-                                        //TODO:这里修改当前record图片的单词签名不可用，需要将next_id改为当前id
                                         $.ajax({
-                                            url:'/getToken',
-                                            data:{file: e.target.files[0].name}
+                                            url:'/onceToken',
+                                            data:{path: "/record/{{$record->id}}/"+e.target.files[0].name}
                                         }).done(function(data){
-                                            callback(data.sign_b);
+                                            callback(data.sign);
                                         });
                                     }
                                 }); 
@@ -93,11 +92,9 @@
                                 };
                                 //直接根据当前id拼接path后执行上传操作
                                 var file = e.target.files[0];
-                                var id={{$record->id}};
-                                var filepath="/record/"+id+"/"+file.name;
+                                var filepath="/record/{{$record->id}}/"+file.name;
                                 cos.uploadFile(successCallBack, errorCallBack, progressCallBack, "{{env('COS_BUCKET')}}", filepath, file, 1);
                                    
-                                
                             });
                         });
                         

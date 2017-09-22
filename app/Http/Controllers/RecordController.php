@@ -36,8 +36,9 @@ class RecordController extends Controller
             return view('auth.not-login');
         }
         elseif (auth()->user()->member < 3) {
+            $nextID = DB::select("show table status like 'records'")[0]->Auto_increment;
             $faker = Factory::create();
-            return view('create', compact('faker'));
+            return view('create', compact('faker','nextID'));
         }
         else {
             return view('auth.permission-deny');
@@ -198,7 +199,7 @@ class RecordController extends Controller
             'next_key' => $nextID
         ]);
     }
-    
+
     //获取record的下一个id
     public function getNextID()
     {

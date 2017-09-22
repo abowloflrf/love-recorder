@@ -13,6 +13,10 @@
                     <div class="card-body">
                         <form action="/records" method="post">
                             {{csrf_field()}}
+
+                            {{--  记录nextID  --}}
+                            <input type="hidden" id="record-id" value="{{$nextID}}">
+
                             <div class="form-group">
                                 <label for="title">标题 (30字)</label>
                                 <input class="form-control" type="text" name="title" value="{{$faker->text($maxNbChars = 30)}}" maxlength="30" required autofocus>
@@ -37,6 +41,7 @@
 
                             <script>
                                 $(document).ready(function() {
+                                    var nextID=document.getElementById('record-id').value;
                                     $('#file-upload').on('change', function(e) {
                                         //新建cos对象
                                         var cos = new CosCloud({
@@ -46,16 +51,16 @@
                                             getAppSign: function (callback) {
                                                 //获取多次签名 必填参数
                                                 $.ajax({
-                                                    url:'/getToken'
+                                                    url:'/reusableToken'
                                                 }).done(function (data) {
-                                                    callback(data.sign_a);
+                                                    callback(data.sign);
                                                 });        
                                             },
                                             getAppSignOnce: function (callback) {
                                                 //单次签名，必填参数，参考上面的注释即可
                                                 $.ajax({
-                                                    url:'/getToken',
-                                                    data:{file: e.target.files[0].name}
+                                                    url:'/onceToken',
+                                                    data:{path: "/record/"+nextID+"/"+e.target.files[0].name}
                                                 }).done(function(data){
                                                     callback(data.sign_b);
                                                 });
@@ -81,16 +86,8 @@
                                             );
                                         };
                                         var file = e.target.files[0];
-                                        //获取到下一个record的id拼接path后执行上传图片
-                                        $.ajax({
-                                            url: "/getNextID",
-                                            })
-                                            .done(function(data) {
-                                                var nextID=data.next_id;
-                                                var filepath="/record/"+nextID+"/"+file.name;
-                                                cos.uploadFile(successCallBack, errorCallBack, progressCallBack, "{{env('COS_BUCKET')}}", filepath, file, 1);
-                                            }
-                                        );
+                                        var filepath="/record/"+nextID+"/"+file.name;
+                                        cos.uploadFile(successCallBack, errorCallBack, progressCallBack, "{{env('COS_BUCKET')}}", filepath, file, 1);
                                         
                                     });
                                 });
