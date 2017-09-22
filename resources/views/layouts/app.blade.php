@@ -50,6 +50,8 @@
                                 </a>
 
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                        <a class="dropdown-item" href="{{ route('settings') }}">设置</a>
+                                        <a class="dropdown-item" href="/profile/{{Auth::user()->id}}">个人资料</a>
                                         <a class="dropdown-item" href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

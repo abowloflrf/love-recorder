@@ -15,7 +15,7 @@
         {{$comment->comment}}
         @if($comment->is_replied==TRUE)
         <hr style="margin-top:0.5rem;margin-bottom:0.5rem;">
-        <div class="ml-3">
+        <div class="ml-5">
             <small><em>
             <b>{{\App\Reply::where('reply_to_id', '=', $comment->id)->firstOrFail()->user()->value('name')}}</b>回复到：
             {{\App\Reply::where('reply_to_id', '=', $comment->id)->firstOrFail()->reply_body}}

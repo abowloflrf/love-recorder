@@ -81,9 +81,9 @@
                                             );
                                         };
                                         var file = e.target.files[0];
+                                        //获取到下一个record的id拼接path后执行上传图片
                                         $.ajax({
-                                            url: "/getToken",
-                                            data:{onlyid:1},
+                                            url: "/getNextID",
                                             })
                                             .done(function(data) {
                                                 var nextID=data.next_id;

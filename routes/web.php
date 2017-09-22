@@ -26,11 +26,19 @@ Route::put('/records/{id}','RecordController@update');
 Route::delete('/records/{record}','RecordController@delete')->middleware('admin');
 //love
 Route::post('/records/{record}/love-up','RecordController@loveUp');
-//msgboard
+//board
 Route::get('/board','CommentController@index')->name('board');
 Route::post('/board','CommentController@store');
-Route::post('/board/reply','CommentController@reply');
+Route::post('/board/reply','CommentController@reply')->middleware('admin');
+//profile&settings
+Route::get('/profile/{user}','ProfileController@viewProfile');
+Route::get('/settings','ProfileController@viewSettings')->middleware('auth')->name('settings');
+Route::post('/settings','ProfileController@update')->middleware('auth');
 //apis
 Route::get('/api/records/{record}','RecordController@getRecord');
 Route::get('/getToken','RecordController@getSign')->middleware('admin');
+Route::get('/nextID','RecordController@getNextID')->middleware('admin');
+//new cos token
+Route::get('/reusableToken','CosTokenController@reusable')->middleware('auth');
+Route::get('/onceToken','CosTokenController@once')->middleware('auth');
 

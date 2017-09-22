@@ -171,6 +171,8 @@ class RecordController extends Controller
         return response()->json($data);
     }
 
+
+    //TODO:这里获取密钥的方法需要重新提取然后重写成一个新的类
     //获取上传密钥
     public function getSign(Request $request)
     {
@@ -195,5 +197,12 @@ class RecordController extends Controller
             'sign_b' => $sign_b,
             'next_key' => $nextID
         ]);
+    }
+    
+    //获取record的下一个id
+    public function getNextID()
+    {
+        $nextID = DB::select("show table status like 'records'")[0]->Auto_increment;
+        return response()->json(['next_id' => $nextID]);
     }
 }

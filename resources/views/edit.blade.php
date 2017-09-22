@@ -39,7 +39,7 @@
                             <div class="progress mt-3">
                                 <div class="progress-bar" role="progressbar" style="width:0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
-                            <img src="{{$record->cover_img.'/thumb?'}}" alt="upload" class="img-thumbnail mt-3 d-block" style="width:200px">
+                            <img src="{{$record->cover_img.'/thumb'}}" alt="upload" class="img-thumbnail mt-3 d-block" style="width:200px">
                         </div>
 
                         <script>
@@ -74,7 +74,9 @@
                                 var successCallBack = function (result) {
                                     var path=result.data.resource_path;
                                     var upload_img=path.substring(24);
+                                    //更新hidden input部分的value
                                     $('#cover_img').val('https://loverecorder-1251779005.picsh.myqcloud.com'+upload_img);
+                                    //更新上传后的预览图src
                                     $('.img-thumbnail').attr('src','https://loverecorder-1251779005.picsh.myqcloud.com'+upload_img+'/thumb');
                                 };
 
@@ -89,6 +91,7 @@
                                         progress + '%'
                                     );
                                 };
+                                //直接根据当前id拼接path后执行上传操作
                                 var file = e.target.files[0];
                                 var id={{$record->id}};
                                 var filepath="/record/"+id+"/"+file.name;
