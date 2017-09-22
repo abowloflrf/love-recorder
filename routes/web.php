@@ -30,6 +30,10 @@ Route::post('/records/{record}/love-up','RecordController@loveUp');
 Route::get('/board','CommentController@index')->name('board');
 Route::post('/board','CommentController@store');
 Route::post('/board/reply','CommentController@reply')->middleware('admin');
+//about
+Route::get('/about',function(){
+    return view('about');
+})->name('about');
 //profile&settings
 Route::get('/profile/{user}','ProfileController@viewProfile');
 Route::get('/settings','ProfileController@viewSettings')->middleware('auth')->name('settings');

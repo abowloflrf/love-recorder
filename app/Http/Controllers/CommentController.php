@@ -39,7 +39,7 @@ class CommentController extends Controller
             'display_name'=>$request->display_name,
             'email'=>$request->email
         ]);
-
+        session()->flash('message','发表成功！');
         return redirect('/board');
     }
 

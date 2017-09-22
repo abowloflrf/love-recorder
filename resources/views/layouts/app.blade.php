@@ -35,6 +35,7 @@
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item"><a class="nav-link" href="{{ route('board') }}">留言板</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ route('about') }}">关于</a></li>
                     </ul>
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -50,8 +51,8 @@
                                 </a>
 
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                        <a class="dropdown-item" href="{{ route('settings') }}">设置</a>
                                         <a class="dropdown-item" href="/profile/{{Auth::user()->id}}">个人资料</a>
+                                        <a class="dropdown-item" href="{{ route('settings') }}">设置</a>
                                         <a class="dropdown-item" href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

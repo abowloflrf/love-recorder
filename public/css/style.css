@@ -12,18 +12,8 @@ body {
     min-height: 100%;
 }
 
-.love-time h1 {
-    font-size: 72px;
-    font-family: 'Lobster', cursive;
-}
-
-.love-time h1:nth-child(3) {
-    font-size: 48px;
-}
-
-.love-time span {
-    color: #6C567B;
-    font-size: 72px;
+.navbar {
+    box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
 }
 
 .footer {
@@ -43,20 +33,42 @@ body {
 .footer p {
     margin-top: 1rem;
     margin-bottom: 0;
-    color:#868e96;
+    color: #868e96;
 }
 
+.footer-site a,.footer-email a{
+    color:#495057;
+}
 .footer-email {
     text-align: right;
 }
 
-.container .text-muted {
-    margin: 20px 0;
+
+/* love time */
+
+.love-time h1:nth-child(2) {
+    font-size: 48px;
 }
 
-.navbar {
-    box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
+.love-time h1 {
+    font-size: 72px;
+    font-family: 'Lobster', cursive;
 }
+
+.love-time h1:nth-child(3) {
+    font-size: 48px;
+}
+
+.love-time span {
+    color: #6C567B;
+    font-size: 72px;
+}
+
+
+/* end of love time */
+
+
+/* timeline */
 
 .timeline-card-cover {
     width: 100%;
@@ -72,8 +84,36 @@ body {
     margin-bottom: 0;
 }
 
-.love-time h1:nth-child(2) {
-    font-size: 48px;
+
+/* end of timeline */
+
+
+/* index modal card */
+
+img#detail-modal-cover {
+    width: 100%;
+    padding: 4px;
+    border: 1px solid #ddd;
+}
+
+#detail-modal-meta {
+    font-size: 1rem;
+}
+
+#detail-modal-author {
+    color: #868e96;
+}
+
+#detail-modal-author:hover {
+    color: #495057;
+}
+
+#detail-modal-link {
+    text-decoration: none;
+}
+
+#detail-modal-body {
+    font-size: 1.5em;
 }
 
 i.love-btn {
@@ -101,28 +141,24 @@ i.love-btn-white {
     text-shadow: 0px 0px 2px rgba(255, 255, 255, 0.85);
 }
 
-img#detail-modal-cover {
-    width: 100%;
-    padding: 4px;
-    border: 1px solid #ddd;
-}
 
-#detail-modal-meta {
-    font-size: 1rem;
-}
-
-#detail-modal-body {
-    font-size: 1.5em;
-}
+/* end of index modal card */
 
 
 /* profile */
-.profile-card .profile-avatar{
-    width:100px;
+.profile-card .profile-avatar {
+    width: 100px;
     padding: 4px;
     border: 1px solid #ddd;
 }
 /* end of profile */
+/* settins */
+.avatar-thumbnail {
+    width: 100px;
+    padding: 4px;
+    border: 1px solid #ddd;
+}
+/* end of settins */
 @media screen and (max-width:576px) {
     #detail-modal-body {
         font-size: 1em;

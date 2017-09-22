@@ -8,7 +8,7 @@
          - <em><small class="text-muted">{{$comment->created_at}}</small></em>
         @if(Auth::guest())
         @elseif(auth()->user()->member<3&&$comment->is_replied==FALSE)
-            <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#replyModal" data-commentid="{{$comment->id}}">回复</button>
+            <button class="btn btn-primary btn-sm float-right" data-toggle="modal" data-target="#replyModal" data-commentid="{{$comment->id}}">回复</button>
         @endif
     </div>
     <div class="card-body">

@@ -13,8 +13,7 @@ function loadDetailModal(e) {
         $('#detail-modal-avatar').attr('src',data.user_avatar);
         $('#edit-button').attr('href','/records/'+record_id+'/edit');
         $('#detail-modal-link').attr('href','/profile/'+data.user_id);
+        //数据加载完毕后显示modal
+        $('#detail-modal').modal('show')
     })
 }
-$("#detail-modal").on('hidden.bs.modal', function (e) {
-    $(this).removeData("bs.modal");
-})

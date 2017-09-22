@@ -29,7 +29,7 @@ class ProfileController extends Controller
             'avatar' => $request->avatar,
             'intro' => $request->intro
         ]);
-
+        session()->flash('message','资料更新成功！');
         return redirect('/settings');
     }
 }

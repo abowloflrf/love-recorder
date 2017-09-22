@@ -3,20 +3,22 @@
 @section('content')
 <link rel="stylesheet" href="{{asset('css/timeline.css')}}">
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-md-8 mx-auto">
-            <div class="card">
-                <div class="card-header">Welcome</div>
-                <div class="card-body">
-                    @if(!auth()->check())<b>guest</b>
-                    @elseif(auth()->user()->member=='1')<b>lucky girl</b>
-                    @elseif(auth()->user()->member=='2')<b>lucky boy</b>
-                    @else<b>{{auth()->user()->name}}</b>
-                    @endif
+    @if($flash = session('message'))
+        <div class="row">
+            <div class="col-md-8 mx-auto">
+                <div class="alert alert-success" role="alert">
+                    {{$flash}} 
+                    <b>
+                            @if(!auth()->check())<b>guest</b>
+                            @elseif(auth()->user()->member=='1')<b>lucky girl</b>
+                            @elseif(auth()->user()->member=='2')<b>lucky boy</b>
+                            @else<b>{{auth()->user()->name}}</b>
+                            @endif
+                    </b>
                 </div>
             </div>
         </div>
-    </div>
+    @endif
 
     <div class="love-time mt-3">
         <h1 class="text-center">We have been together for:</h1>

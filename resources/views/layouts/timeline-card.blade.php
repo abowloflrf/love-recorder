@@ -24,7 +24,7 @@
             <p class="text-truncate">{{$record->body}}</p>
             <span class="cd-date">{{\Carbon\Carbon::parse($record->date_and_time)->diffForHumans() }}</span>
             <div class="text-right">
-                <a href="#" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg" onclick="loadDetailModal(this)">更多</a>
+                <button class="btn btn-primary" onclick="loadDetailModal(this)">更多</button>
             </div>        
         </div>
     </div> <!-- cd-timeline-content -->

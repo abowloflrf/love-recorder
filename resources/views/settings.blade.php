@@ -3,6 +3,11 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8 mx-auto">
+            @if($flash=session('message'))
+                <div class="alert alert-success" role="alert">
+                    {{$flash}}
+                </div>
+            @endif  
             <div class="card">
                 <div class="card-header">
                     个人设置
@@ -35,7 +40,7 @@
                             <div class="progress mt-3">
                                 <div class="progress-bar" role="progressbar" style="width:0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
-                            <img src="{{$user->avatar.'/avatar'}}" alt="upload" class="avatar-thumbnail mt-3 d-block" style="width:100px">
+                            <img src="{{$user->avatar.'/avatar'}}" alt="upload" class="avatar-thumbnail mt-3 d-block">
                         </div>
                         <script>
                         //TODO:头像上传限制大小
