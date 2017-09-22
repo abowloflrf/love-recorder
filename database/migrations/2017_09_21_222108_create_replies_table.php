@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateReplysTable extends Migration
+class CreateRepliesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -29,6 +29,6 @@ class CreateReplysTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('replys');
+        Schema::dropIfExists('replies');
     }
 }

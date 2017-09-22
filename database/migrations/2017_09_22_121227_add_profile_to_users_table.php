@@ -14,7 +14,7 @@ class AddProfileToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->text('intro')->default('');
+            $table->text('intro')->nullable();
             $table->string('avatar')->default('https://loverecorder-1251779005.picsh.myqcloud.com/user/avatar/avatar-default.png');
         });
     }
