@@ -10,7 +10,7 @@
                 <div class="card-body">
                     @if(!auth()->check())<b>guest</b>
                     @elseif(auth()->user()->member=='1')<b>lucky girl</b>
-                    @elseif(auth()->user()->member=='1')<b>lucky boy</b>
+                    @elseif(auth()->user()->member=='2')<b>lucky boy</b>
                     @else<b>{{auth()->user()->name}}</b>
                     @endif
                 </div>
@@ -23,7 +23,7 @@
         <h1 class="text-center"><span id="love-time-d"></span>Days <span id="love-time-h"></span>H <span id="love-time-m"></span>M <span id="love-time-s"></span>S</h1>
         <script>
             var lovedate=new Date(2017,0,1);
-            setInterval(function(){
+            var refreshTime=function(){
                 var datenow = new Date();
                 var duration=datenow-lovedate;
                 var duration_d=parseInt(duration/(1000*60*60*24));
@@ -35,7 +35,9 @@
                 document.getElementById('love-time-h').innerHTML=duration_h;
                 document.getElementById('love-time-m').innerHTML=duration_m;
                 document.getElementById('love-time-s').innerHTML=duration_s;
-            },1000);
+            }
+            refreshTime();
+            setInterval(refreshTime,1000);
             
         </script>
     </div>

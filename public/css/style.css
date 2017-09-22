@@ -115,6 +115,14 @@ img#detail-modal-cover {
     font-size: 1.5em;
 }
 
+
+/* profile */
+.profile-card .profile-avatar{
+    width:100px;
+    padding: 4px;
+    border: 1px solid #ddd;
+}
+/* end of profile */
 @media screen and (max-width:576px) {
     #detail-modal-body {
         font-size: 1em;

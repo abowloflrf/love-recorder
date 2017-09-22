@@ -12,7 +12,5 @@ npm run dev
 php artisan serve
 ```
 Visit 127.0.0.1:8000 to view the website
-### Desktop Preview
-![](preview.jpg) 
-### Mobile Preview
-![](mobile-preview.png)
+### Preview
+![](preview.png) 

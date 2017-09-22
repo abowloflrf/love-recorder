@@ -10,7 +10,9 @@ function loadDetailModal(e) {
         $('#detail-modal-author').text(data.user_name);
         $('#detail-modal-time').text(data.date_and_time);
         $('#detail-modal-cover').attr('src',data.cover_img+'/view');
+        $('#detail-modal-avatar').attr('src',data.user_avatar);
         $('#edit-button').attr('href','/records/'+record_id+'/edit');
+        $('#detail-modal-link').attr('href','/profile/'+data.user_id);
     })
 }
 $("#detail-modal").on('hidden.bs.modal', function (e) {

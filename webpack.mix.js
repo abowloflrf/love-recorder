@@ -12,6 +12,5 @@ let mix = require('laravel-mix');
  */
 
 mix.js('resources/assets/js/app.js', 'public/js/bundle.js')
-   .js('node_modules/cos-js-sdk-v4/dist/cos-js-sdk-v4.js', 'public/js/cos.js')
    .sass('resources/assets/sass/app.scss', 'public/css/bundle.css')
    .sass('resources/assets/sass/timeline.scss','public/css/timeline.css');

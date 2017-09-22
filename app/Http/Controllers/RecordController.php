@@ -163,6 +163,7 @@ class RecordController extends Controller
             "title" => $record->title,
             "user_id" => $record->user_id,
             "user_name" => $record->user()->value('name'),
+            "user_avatar"=> $record->user()->value('avatar'),
             "cover_img" => $record->cover_img,
             "body" => $record->body,
             "date_and_time" => $record->date_and_time,
@@ -170,40 +171,5 @@ class RecordController extends Controller
             "loves"=>$record->loves
         ];
         return response()->json($data);
-    }
-
-
-    //TODO:这里获取密钥的方法需要重新提取然后重写成一个新的类
-    //获取上传密钥
-    public function getSign(Request $request)
-    {
-        //获得即将要创建的record的id即数据库中将要插入的下一条记录的id
-        $nextID = DB::select("show table status like 'records'")[0]->Auto_increment;
-        //只获取id
-        if ($request->has('onlyid') && $request->onlyid == 1) {
-            return response()->json(['next_id' => $nextID]);
-        }
-
-        //使用cos sdk生成密钥
-        $auth = new Auth($appId = $this->config['app_id'], $secretId = $this->config['secret_id'], $secretKey = $this->config['secret_key'] . '');
-        $expiration = time() + 3600;
-        $bucket = env('COS_BUCKET');
-        $filepath = '/record/' . $nextID . '/' . $request->file;
-        $sign_a = $auth->createReusableSignature($expiration, $bucket, null);//多次签名，文件路径参数可为空
-        //TODO:这里获取单次签名的filepath最好由参数传过来
-        $sign_b = $auth->createNonreusableSignature($bucket, $filepath);//单次签名，文件路径必须
-        //以json形式返回
-        return response()->json([
-            'sign_a' => $sign_a,
-            'sign_b' => $sign_b,
-            'next_key' => $nextID
-        ]);
-    }
-
-    //获取record的下一个id
-    public function getNextID()
-    {
-        $nextID = DB::select("show table status like 'records'")[0]->Auto_increment;
-        return response()->json(['next_id' => $nextID]);
     }
 }

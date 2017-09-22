@@ -36,8 +36,6 @@ Route::get('/settings','ProfileController@viewSettings')->middleware('auth')->na
 Route::post('/settings','ProfileController@update')->middleware('auth');
 //apis
 Route::get('/api/records/{record}','RecordController@getRecord');
-Route::get('/getToken','RecordController@getSign')->middleware('admin');
-Route::get('/nextID','RecordController@getNextID')->middleware('admin');
 //new cos token
 Route::get('/reusableToken','CosTokenController@reusable')->middleware('auth');
 Route::get('/onceToken','CosTokenController@once')->middleware('auth');

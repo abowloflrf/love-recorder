@@ -4,12 +4,12 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8 mx-auto">
-            <div class="card">
+            <div class="card profile-card">
                 <div class="card-header">
-                    <b>{{$user->name}}</b>的资料
+                    <h1 class="display-4">{{$user->name}}</h1>
                 </div>
                 <div class="card-body">
-                    <img src="{{$user->avatar.'/avatar'}}" class="avatar-thumbnail mt-3 d-block" style="width:100px">
+                    <img src="{{$user->avatar.'/avatar'}}" class="profile-avatar mt-3 d-block">
                     <hr>
                     <p>简介:</p>
                     <p>{{$user->intro}}</p>

@@ -8,7 +8,8 @@
         </button>
       </div>
       <div class="modal-body">
-        <p id="detail-modal-meta" class="text-muted lead"><span id="detail-modal-author">User</span> 记录于 <span class="font-italic"id="detail-modal-time">1 Jan 2017</span></p>            
+        <a href="" id="detail-modal-link"><img id="detail-modal-avatar" src="" style="width:22px;height:22px;margin=2px;border-radius:50%;"><span id="detail-modal-author" class="ml-1">User</span></a>
+        <p id="detail-modal-meta" class="text-muted lead d-inline-block"> 记录于 <span class="font-italic"id="detail-modal-time">1 Jan 2017</span></p>            
         <img id="detail-modal-cover" src="" class="img-fluid">
         <div id="detail-modal-body" class="container p-3">
             Loading...
