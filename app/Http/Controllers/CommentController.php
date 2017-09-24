@@ -70,7 +70,11 @@ class CommentController extends Controller
 
     public function delete(Comment $comment)
     {
+        //先删除回复
+        Reply::where('reply_to_id',$comment->id)->delete();
+        //再删除评论
         $comment->delete();
+        //重定向
         return redirect('/board');
     }
 }

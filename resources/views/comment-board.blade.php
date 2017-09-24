@@ -44,10 +44,13 @@
             </form>
 
             <hr>
-
-            @foreach($comments as $comment)
-                @include('layouts.single-comment')
-            @endforeach
+            @if($comments->count()==0)
+                <p class="text-muted">还没有人留下足迹...</p>
+            @else
+                @foreach($comments as $comment)
+                    @include('layouts.single-comment')
+                @endforeach
+            @endif
         
             @if(Auth::guest())
             @elseif(auth()->user()->member<3)

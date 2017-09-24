@@ -6,15 +6,18 @@
             <small>{{$comment->email}}</small>
         @endif
          - <em><small class="text-muted">{{$comment->created_at}}</small></em>
+
         @if(Auth::guest())
-        @elseif(auth()->user()->member<3&&$comment->is_replied==FALSE)
+        @elseif(auth()->user()->member<3)
             <div class="float-right">
                 <form class="d-inline"action="/board/comment/{{$comment->id}}" method="post" onsubmit="return confirm('确认要删除?');">
                     {{csrf_field()}}
                     {{method_field('DELETE')}}
                     <button class="btn btn-danger btn-sm" type="submit">删除</button>
                 </form>
+                @if($comment->is_replied==FALSE)
                 <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#replyModal" data-commentid="{{$comment->id}}">回复</button>
+                @endif
             </div>
         @endif
     </div>
