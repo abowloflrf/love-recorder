@@ -30,6 +30,7 @@ Route::post('/records/{record}/love-up','RecordController@loveUp');
 Route::get('/board','CommentController@index')->name('board');
 Route::post('/board','CommentController@store');
 Route::post('/board/reply','CommentController@reply')->middleware('admin');
+Route::delete('/board/comment/{comment}','CommentController@delete')->middleware('admin');
 //about
 Route::get('/about',function(){
     return view('about');

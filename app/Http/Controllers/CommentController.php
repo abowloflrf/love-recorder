@@ -67,4 +67,10 @@ class CommentController extends Controller
 
         return redirect('/board');
     }
+
+    public function delete(Comment $comment)
+    {
+        $comment->delete();
+        return redirect('/board');
+    }
 }
