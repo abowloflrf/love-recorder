@@ -13,7 +13,7 @@
                 {{csrf_field()}}
                 <div class="form-group form-row">
                     <div class="form-group col-sm-8">
-                        <textarea class="form-control" name="comment" rows="9" required></textarea>
+                        <textarea class="form-control" name="comment" rows="9" maxlength="140" required></textarea>
                     </div>                    
                     <div class="col-sm-4">
                         <div class="form-group">

@@ -28,7 +28,7 @@ class CommentController extends Controller
     public function store(Request $request)
     {
         $this->validate(request(), [
-            'comment' => 'required',
+            'comment' => 'required|max:300',
             'display_name' => 'required',
             'email' => 'required',
             'captcha' => 'required|captcha'
@@ -65,6 +65,7 @@ class CommentController extends Controller
             'is_replied'=>TRUE
         ]);
 
+        session()->flash('message','回复成功！');
         return redirect('/board');
     }
 

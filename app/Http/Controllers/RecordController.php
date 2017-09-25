@@ -37,8 +37,7 @@ class RecordController extends Controller
         }
         elseif (auth()->user()->member < 3) {
             $nextID = DB::select("show table status like 'records'")[0]->Auto_increment;
-            $faker = Factory::create();
-            return view('create', compact('faker','nextID'));
+            return view('create', compact('nextID'));
         }
         else {
             return view('auth.permission-deny');
