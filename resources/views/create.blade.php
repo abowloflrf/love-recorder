@@ -41,6 +41,9 @@
 
                             <script>
                                 $(document).ready(function() {
+                                    //TODO:检测字数相关
+                                    
+                                    //以下是上传图片相关js
                                     var nextID=document.getElementById('record-id').value;
                                     $('#file-upload').on('change', function(e) {
                                         //新建cos对象
