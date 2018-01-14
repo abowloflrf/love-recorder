@@ -105,11 +105,10 @@
                             
                             <input type="hidden" name="cover_img" id="upload-img-input" required>
 
-                            <div class="form-check">
+                            <div class="form-group">
                                 <label class="custom-control custom-checkbox">
                                     <input type="checkbox" name="private" class="custom-control-input">
-                                    <span class="custom-control-indicator"></span>
-                                    <span class="custom-control-description">私密记录</span>
+                                    <span class="custom-control-label">私密记录</span>
                                 </label>
                             </div>
                             

@@ -18,17 +18,23 @@
                     <div class="col-sm-4">
                         <div class="form-group">
                             <div class="input-group">
-                                <span class="input-group-addon">昵称</span>
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">昵称</span>
+                                </div>
                                 <input type="text" name="display_name" class="form-control" placeholder="显示昵称" required>
                             </div>
                         </div>
                         <div class="input-group form-group">
-                            <span class="input-group-addon">Email</span>
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Email</span>
+                            </div>
                             <input type="email" name="email" class="form-control" placeholder="仅我知道" required>
                         </div>
                         <div class="form-group">
                             <div class="input-group">
-                                <span class="input-group-addon" style="padding:0;width:80px;"><img src="{{Captcha::src('flat')}}" alt="captcha" style="width:80px;height:30px;margin:0 4px" onclick="this.src='/captcha/flat?'+Math.random()"></img></span>
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" style="padding:6px 6px;"><img src="{{Captcha::src('flat')}}" alt="captcha" style="width:80px;height:30px;" onclick="this.src='/captcha/flat?'+Math.random()"></img></span>
+                                </div>
                                 <input type="text" name="captcha" maxlength="4" class="form-control 
                                     @if ($errors->has('captcha'))
                                         is-invalid

@@ -104,17 +104,16 @@
                             <input name="date_and_time" class="datepicker-here form-control" data-timepicker="true" data-language='zh' data-position="top left" value="{{$record->date_and_time}}" required>
                         </div>
                         <input type="hidden" name="cover_img" id="cover_img" value="{{$record->cover_img}}" required>
-                        <div class="form-check">
-                            <label class="custom-control custom-checkbox">
-                            @if($record->private)
-                                <input type="checkbox" name="private" class="custom-control-input" checked>
-                            @else
-                                <input type="checkbox" name="private" class="custom-control-input">
-                            @endif
-                                <span class="custom-control-indicator"></span>
-                                <span class="custom-control-description">私密记录</span>
-                            </label>
-                        </div>                      
+                        <div class="form-group">
+                                <label class="custom-control custom-checkbox">
+                                @if($record->private)
+                                    <input type="checkbox" name="private" class="custom-control-input" checked>
+                                @else
+                                    <input type="checkbox" name="private" class="custom-control-input">
+                                @endif
+                                    <span class="custom-control-label">私密记录</span>
+                                </label>
+                        </div>                    
                         <div class="form-group">
                             <button class="btn btn-primary" type="submit">发布</button>
                         </div>
