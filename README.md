@@ -1,7 +1,7 @@
 # love-recorder
 
 <p>为了记录我们之间生活的两三事，在17年暑假萌生了此想法，能够以时间线的形式记录我们一路走来一切值得纪念的事情。既避免了纸质笔记本的麻烦也避免了丢失的意外。</p>
-<p>整站基于<a href="https://laravel.com/" target="_blank"><b>Laravel 5.5</b></a>,托管于<a href="https://www.vultr.com/?ref=7125603" target="_blank"><b>Vultr</b></a>东京2节点服务器，所有图片均储存在<a href="https://cloud.tencent.com/" target="_blank"><b>腾讯云</b></a>万象优图上，为了避免图片上传时的二次传输，使用了腾讯云对象存储的js sdk只需要从远程服务器获取上传密钥即可从浏览器直传至腾讯云。</p>
+<p>整站基于<a href="https://laravel.com/" target="_blank"><b>Laravel 5.5</b></a>,托管于<a href="https://www.vultr.com/?ref=7125603" target="_blank"><b>Vultr</b></a>LA节点服务器，所有图片均储存在<a href="https://cloud.tencent.com/" target="_blank"><b>腾讯云</b></a>万象优图上，为了避免图片上传时的二次传输，使用了腾讯云对象存储的js sdk只需要从远程服务器获取上传密钥即可从浏览器直传至腾讯云。</p>
 <p>前端使用<a href="http://getbootstrap.com/"><b>Bootstrap-v4 beta</b></a>需要自定义的部分使用scss修改变量编译而使用。</p>
 <p>其他依赖：</p>
 <ul>
