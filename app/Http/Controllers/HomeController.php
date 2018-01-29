@@ -21,7 +21,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $records=Record::orderby('date_and_time','desc')->get();
+        $records=Record::orderby('date_and_time','desc')->paginate(10);
         return view('home',compact('records'));
     }
 }

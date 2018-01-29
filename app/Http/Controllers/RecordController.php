@@ -70,7 +70,7 @@ class RecordController extends Controller
             'private' => $isPrivate
         ]);
 
-        return redirect('/home');
+        return redirect('/');
     }
 
     //返回修改record视图
@@ -113,7 +113,7 @@ class RecordController extends Controller
             'private' => $isPrivate
         ]);
 
-        return redirect('/home');
+        return redirect('/');
     }
 
     //删除record信息且同时删除腾讯云中相应的图片
@@ -137,7 +137,7 @@ class RecordController extends Controller
         }
         //删除数据库中的记录
         $record->delete();
-        return redirect('/home');
+        return redirect('/');
     }
 
     public function loveUp(Record $record)

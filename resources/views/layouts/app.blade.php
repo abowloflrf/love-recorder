@@ -24,7 +24,7 @@
         <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
             <div class="container">
                     <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/home') }}" style="font-family:Lobster">
+                    <a class="navbar-brand" href="{{ route('home') }}" style="font-family:Lobster">
                         {{ config('app.name', 'Laravel') }}
                     </a>
                     <!-- Collapsed Hamburger -->

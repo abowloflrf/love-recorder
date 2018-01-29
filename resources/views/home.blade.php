@@ -41,6 +41,7 @@
             @endforeach
         @endif
     </section> <!-- cd-timeline -->
+    {{ $records->links("pagination::bootstrap-4") }}
 </div>
 </body>
 
