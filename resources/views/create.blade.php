@@ -29,10 +29,12 @@
                             {{--  上传图片  --}}
                             <script src="{{asset('js/cos-js-sdk-v4.js')}}"></script>
                             <div class="form-group">
-                                <label class="custom-file">
-                                    <input type="file" id="file-upload" name="file" class="custom-file-input" accept="image/*" multiple>
-                                    <span class="custom-file-control"></span>
-                                </label>
+                                <div class="input-group mb-3">
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" id="file-upload" name="file" accept="image/*" multiple>
+                                        <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                                    </div>
+                                </div>
                                 <div class="progress mt-3">
                                     <div class="progress-bar" role="progressbar" style="width:0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
@@ -71,10 +73,13 @@
                                         }); 
                                         //开始上传文件
                                         var successCallBack = function (result) {
-                                            var path=result.data.resource_path;
-                                            var upload_img=path.substring(24);
-                                            $('#upload-img-input').val('https://loverecorder-1251779005.picsh.myqcloud.com'+upload_img);
-                                            $('.img-thumbnail').attr('src','https://loverecorder-1251779005.picsh.myqcloud.com'+upload_img+'/thumb');
+                                            var cos_url=result.data.source_url;
+                                            //替换默认访问url中的http为https
+                                            cos_url=cos_url.replace("http://","https://");
+                                            //替换默认访问url中cos访问为腾讯云万象优图图像处理域名pic
+                                            cos_url=cos_url.replace(".cos",".pic");
+                                            $('#upload-img-input').val(cos_url);
+                                            $('.img-thumbnail').attr('src',cos_url+'/thumb');
                                         };
 
                                         var errorCallBack = function (result) {

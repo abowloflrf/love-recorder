@@ -71,10 +71,13 @@
                                         }); 
                                         //开始上传文件
                                         var successCallBack = function (result) {
-                                            var path=result.data.resource_path;
-                                            var upload_avatar=path.substring(24);
-                                            $('#upload-avatar-input').val('https://loverecorder-1251779005.picsh.myqcloud.com'+upload_avatar);
-                                            $('.avatar-thumbnail').attr('src','https://loverecorder-1251779005.picsh.myqcloud.com'+upload_avatar+'/avatar');
+                                            var cos_url=result.data.source_url;
+                                            //替换默认访问url中的http为https
+                                            cos_url=cos_url.replace("http://","https://");
+                                            //替换默认访问url中cos访问为腾讯云万象优图图像处理域名pic
+                                            cos_url=cos_url.replace(".cos",".pic");
+                                            $('#upload-avatar-input').val(cos_url);
+                                            $('.avatar-thumbnail').attr('src',cos_url+'/avatar');;
                                         };
 
                                         var errorCallBack = function (result) {
